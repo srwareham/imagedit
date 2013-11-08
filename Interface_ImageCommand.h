@@ -10,12 +10,17 @@
 #define __imagedit__Interface_ImageComand__
 
 #include <iostream>
+#include <vector>
+#include <map>
+#include <string>
 
 class Interface_ImageCommand {
 private:
+    std::map<std::string,std::string> myFlags; // (flag, flagVal)
 public:
     virtual void OverrideMe() = 0;
     virtual ~Interface_ImageCommand();
+    void setFlag(std::string flag, std::string flagVal);
 };
 
 #endif /* defined(__imagedit__Interface_ImageComand__) */
