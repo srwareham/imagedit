@@ -9,7 +9,10 @@
 #include "BlurFactory.h"
 
 
-BlurCommand* BlurFactory::createBlurCommand(std::map<std::string, std::string> flagMap){
+BlurFactory::BlurFactory(){};
+
+
+ImageCommand* BlurFactory::buildImageCommand(std::map<std::string, std::string> flagMap){
     std::string filterType = "Box";
     int filterR = 10;
     
@@ -28,3 +31,4 @@ BlurCommand* BlurFactory::createBlurCommand(std::map<std::string, std::string> f
     
     return new BlurCommand(filterType, filterR);
 }
+

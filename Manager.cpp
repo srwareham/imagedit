@@ -7,32 +7,22 @@
 //
 
 #include "Manager.h"
-#include "RemoveRedCommand.h"
+#include "BlurFactory.h"
+
 
 
 Manager::Manager() {
-    myPossibleCommands = new std::map<std::string, ImageCommand*>;
-    myActiveCommands = new std::vector<ImageCommand*>;
-    buildMyPossibleCommands();
+    myCommandFactories = new std::map<std::string, Factory*>;
+    myCommandsToExecute = new std::vector<ImageCommand*>;
+    instantiateFactories();
 };
 
-bool Manager::isPossibleCommand(std::string referenceName){
-    return (myPossibleCommands->find(referenceName) != myPossibleCommands->end());
-
-}
-//Used to get an instance of a command and add the command to the active commands
-//hmm this inheriently can only use a given command once in a series.  May need to switch to factories. We'll see.
-ImageCommand* getReferencedCommand(std::string referenceName){
-    return NULL;
+void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
+    myCommandFactories->insert(std::make_pair(referenceName, factoryInstance));
 }
 
-void Manager::addPossibleCommand(std::string referenceName, ImageCommand* commandInstance){
-    myPossibleCommands->insert(std::make_pair(referenceName, commandInstance));
+//This is where new Commands are defined.  Simply create a class, a factory for it, and then instantiate a factory here
+//referenceName is exactly what will be typed in the commandline. case sensitive.
+void Manager::instantiateFactories(){
+    defineFactory("Blur", new BlurFactory());
 }
-//This is where new commands can manually be added
-//--assuming the desired command implements the interface for commands
-//TODO: maychange this to a factory implementation. in which case a factory will be needed as well...
-void Manager::buildMyPossibleCommands(){
-    addPossibleCommand("RemoveRedCommand", new RemoveRedCommand());
-}
-

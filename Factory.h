@@ -10,11 +10,15 @@
 #define __imagedit__Factory__
 
 #include <iostream>
+#include <string>
+#include <map>
+#include "ImageCommand.h"
+
 
 class Factory {
 protected:
 public:
-    virtual void OverrideMe() = 0;
+    virtual ImageCommand* buildImageCommand(std::map<std::string, std::string> flagMap) = 0;
     virtual ~Factory();
 };
 

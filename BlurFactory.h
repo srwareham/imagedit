@@ -16,10 +16,10 @@
 #include <string>
 #include "Factory.h"
 
-class BlurFactory : Factory {
+class BlurFactory : public Factory {
 public:
     BlurFactory();
-    BlurCommand* createBlurCommand(std::map<std::string, std::string> flagMap);
+    ImageCommand* buildImageCommand(std::map<std::string, std::string> flagMap);
     void OverrideMe();
     
 };
