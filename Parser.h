@@ -16,9 +16,13 @@
 
 class Parser {
 private:
+    std::string myInputPath;
+    std::string myOutputPath;
 public:
     Parser();
-    commandMap* parse (int argc, const char * argv[]);
+    commandMap* buildCommandMap (int argc, const char * argv[]);
+    std::string getInputPath();
+    std::string getOutputPath();
 };
 
 #endif /* defined(__imagedit__Parser__) */

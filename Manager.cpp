@@ -7,6 +7,7 @@
 //
 
 #include "Manager.h"
+#include "Parser.h"
 #include "BlurFactory.h"
 
 
@@ -17,9 +18,9 @@ Manager::Manager() {
     instantiateFactories();
 };
 
-//TODO: just make the Manager main.  have it instantiate the parser
-void Manager::setMyCommandMap(Parser* p, int argc, const char **argv){
-    myCommandMap =  p->parse(argc, argv);
+void Manager::setMyCommandMap(int argc, const char **argv){
+    Parser* p = new Parser();
+    myCommandMap = p->buildCommandMap(argc, argv);
 }
 
 void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
@@ -46,4 +47,19 @@ void Manager::queueCommand(std::string referenceName){
         myCommandsToExecute->push_back(factory->buildImageCommand(myCommandMap->at(referenceName)));
         
     }
+}
+
+void Manager::run(){
+    //ImageIO = parser->getInputPath()
+    //for command in commands, command->run(currentImage)
+    
+    
+    //ImageIO->write(parser->getOutputPath()
+}
+
+
+int main(int argc, const char * argv[]){
+    Manager* m = new Manager();
+    m->setMyCommandMap(argc, argv);
+    return EXIT_SUCCESS;
 }

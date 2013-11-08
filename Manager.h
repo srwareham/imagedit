@@ -29,11 +29,13 @@ private:
     
     void defineFactory(std::string referenceName, Factory* factoryInstance);
     void instantiateFactories();
+    void buildCommands();
 public:
     Manager(void);
     bool isPossibleCommand(std::string referenceName);
     void queueCommand(std::string referenceName);
-    void setMyCommandMap(Parser* p, int argc, const char **argv);
+    void setMyCommandMap(int argc, const char **argv);
+    void run();
     
 };
 

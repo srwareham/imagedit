@@ -11,7 +11,7 @@
 Parser::Parser() {
 };
 
-commandMap* Parser::parse(int argc, const char * argv[]){
+commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     //Every command at least needs  an inputFile, an outputFile, and a commandName
     if (argc <3){
         printf("INSUFFICIENT ARGS!\n");
@@ -25,8 +25,8 @@ commandMap* Parser::parse(int argc, const char * argv[]){
     printf("out: %s\n", allArgs.at(2).c_str());
     
     //i =0 is just the name of this program. We dont need this.
-    std::string in = allArgs.at(1);
-    std::string out = allArgs.at(2);
+    myInputPath = allArgs.at(1);
+    myOutputPath = allArgs.at(2);
     
     std::vector<int> commandIndicies;
     int index = 3;
@@ -45,4 +45,12 @@ commandMap* Parser::parse(int argc, const char * argv[]){
 
 
     return NULL;
+}
+
+//NOTE: for both of these functions, buildCommandMap MUST be run first!
+std::string Parser::getInputPath(){
+    return myInputPath;
+}
+std::string Parser::getOutputPath(){
+    return myOutputPath;
 }
