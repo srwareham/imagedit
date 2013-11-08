@@ -8,11 +8,10 @@
 
 #include "Parser.h"
 
-Parser::Parser(Manager* manager) {
-    myManager = manager;
+Parser::Parser() {
 };
 
-std::vector<int>* Parser::parse(int argc, const char * argv[]){
+commandMap* Parser::parse(int argc, const char * argv[]){
     //Every command at least needs  an inputFile, an outputFile, and a commandName
     if (argc <3){
         printf("INSUFFICIENT ARGS!\n");
@@ -44,14 +43,6 @@ std::vector<int>* Parser::parse(int argc, const char * argv[]){
         
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    std::vector<int>* myWeights = new std::vector<int>();
-    return myWeights;
+
+    return NULL;
 }

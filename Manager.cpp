@@ -17,6 +17,11 @@ Manager::Manager() {
     instantiateFactories();
 };
 
+//TODO: just make the Manager main.  have it instantiate the parser
+void Manager::setMyCommandMap(Parser* p, int argc, const char **argv){
+    myCommandMap =  p->parse(argc, argv);
+}
+
 void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
     myCommandFactories->insert(std::make_pair(referenceName, factoryInstance));
 }
@@ -25,4 +30,20 @@ void Manager::defineFactory(std::string referenceName, Factory* factoryInstance)
 //referenceName is exactly what will be typed in the commandline. case sensitive.
 void Manager::instantiateFactories(){
     defineFactory("Blur", new BlurFactory());
+}
+
+bool Manager::isPossibleCommand(std::string referenceName){
+    return (myCommandFactories->find(referenceName) != myCommandFactories->end());
+}
+
+void Manager::queueCommand(std::string referenceName){
+    if (!isPossibleCommand(referenceName)){
+        //TODO:perhaps add some error handling here
+        return;
+    }else{
+        //TODO: not sure this is the correct way to access a map
+        Factory* factory = myCommandFactories->at(referenceName);
+        myCommandsToExecute->push_back(factory->buildImageCommand(myCommandMap->at(referenceName)));
+        
+    }
 }

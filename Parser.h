@@ -12,14 +12,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Manager.h"
+#include "References.h"
 
 class Parser {
 private:
-    Manager* myManager;
 public:
-    Parser(Manager* manager);
-    std::vector<int>* parse (int argc, const char * argv[]);
+    Parser();
+    commandMap* parse (int argc, const char * argv[]);
 };
 
 #endif /* defined(__imagedit__Parser__) */

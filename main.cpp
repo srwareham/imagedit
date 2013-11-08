@@ -19,10 +19,11 @@ int main(int argc, const char * argv[])
 //    commands["RemoveRedCommand"] = new RemoveRedCommand();
     Manager* m = new Manager();
     
-    Parser* p = new Parser(m);
-    p->parse(argc, argv);
+    Parser* p = new Parser();
     
-    BlurCommand* b = new BlurCommand("box", 10);
+    m->setMyCommandMap(p, argc, argv);
+    
+//    BlurCommand* b = new BlurCommand("box", 10);
 //    b->setFlag("f", "val");
     
     return 0;
