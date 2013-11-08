@@ -12,13 +12,13 @@
 BlurFactory::BlurFactory(){};
 
 
-ImageCommand* BlurFactory::buildImageCommand(std::map<std::string, std::string> flagMap){
+ImageCommand* BlurFactory::buildImageCommand(std::map<std::string, std::string>* flagMap){
     std::string filterType = "Box";
     int filterR = 10;
     
     
     std::map<std::string, std::string>::iterator iter;
-    for (iter = flagMap.begin(); iter != flagMap.end(); ++iter) {
+    for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
         if (iter->first == "-filter"){
             filterType = iter->second;
         }

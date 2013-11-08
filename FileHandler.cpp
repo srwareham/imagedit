@@ -14,7 +14,7 @@
 FILE* FileHandler::getFile(std::string inputFilePath){
     FILE* file = fopen(inputFilePath.c_str(), "w");
     if(!file) {
-        fprintf(stderr, "Unable to open file %s", file_name);
+//        fprintf(stderr, "Unable to open file %s", file_name);
         exit(1);
     }else{
         return file;

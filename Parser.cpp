@@ -27,30 +27,46 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     //i =0 is just the name of this program. We dont need this.
     myInputPath = allArgs.at(1);
     myOutputPath = allArgs.at(2);
+    //std::map<std::string, std::map<std::string, std::string>>
+    commandMap* allCommands = new commandMap();
+//    allCommands->insert(std::make_pair("commandName", new std::map<std::string, std::string>()));
     
     std::vector<int> commandIndicies;
-    int index = 3;
-    while(index < argc) {
+    //prev is the index of the first command, and then every ensuing command
+    int prev = 3;
+    for (int index = prev; index < argc; index++) {
         std::string arg = allArgs.at(index);
         printf("val: %s\n", arg.c_str());
-        
-//        if (myManager->isPossibleCommand(arg)) {
-//            commandIndicies.push_back(index);
-//            index +=2;
-//        }
-        
-        index ++;
-        
+        if (arg == ","){
+            std::map<std::string, std::string>* flags = new std::map<std::string, std::string>();
+            std::string commandName = allArgs.at(prev);
+            int i = prev + 1;
+                while (i < index){
+                    std::string flagName = allArgs.at(i);
+                    std::string flagVal = allArgs.at(i);
+                    flags->insert(std::make_pair(flagName, flagVal));
+                    index +=2;
+                }
+            prev = index +1;
+            allCommands->insert(std::make_pair(commandName, flags));
+        }
     }
 
-
-    return NULL;
+    hasBeenParsed = true;
+    return allCommands;
 }
 
 //NOTE: for both of these functions, buildCommandMap MUST be run first!
 std::string Parser::getInputPath(){
-    return myInputPath;
+    if (hasBeenParsed){
+        return myInputPath;
+    }
+    //TODO: probably want better error handling
+    return "UNPARSED";
 }
 std::string Parser::getOutputPath(){
-    return myOutputPath;
+    if (hasBeenParsed){
+        return myOutputPath;
+    }
+    return "UNPARSED";
 }

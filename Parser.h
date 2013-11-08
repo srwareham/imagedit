@@ -12,10 +12,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <map>
 #include "References.h"
 
 class Parser {
 private:
+    bool hasBeenParsed = false;
     std::string myInputPath;
     std::string myOutputPath;
 public:

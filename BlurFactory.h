@@ -19,7 +19,7 @@
 class BlurFactory : public Factory {
 public:
     BlurFactory();
-    ImageCommand* buildImageCommand(std::map<std::string, std::string> flagMap);
+    ImageCommand* buildImageCommand(std::map<std::string, std::string>* flagMap);
     void OverrideMe();
     
 };

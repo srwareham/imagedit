@@ -12,6 +12,6 @@
 #include <map>
 #include <string>
 
-typedef std::map<std::string, std::map<std::string, std::string>> commandMap;
+typedef std::map<std::string, std::map<std::string, std::string>*> commandMap;
 
 #endif

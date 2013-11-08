@@ -18,7 +18,7 @@
 class Factory {
 protected:
 public:
-    virtual ImageCommand* buildImageCommand(std::map<std::string, std::string> flagMap) = 0;
+    virtual ImageCommand* buildImageCommand(std::map<std::string, std::string>* flagMap) = 0;
     virtual ~Factory();
 };
 
