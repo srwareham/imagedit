@@ -4,7 +4,7 @@
 //
 //  Created by Sean Wareham on 11/7/13.
 //  Copyright (c) 2013 Sean Wareham. All rights reserved.
-//
+//TODO: make it so commands do not need a terminating comma.
 
 #include "Parser.h"
 
