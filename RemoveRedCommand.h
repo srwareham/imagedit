@@ -10,7 +10,7 @@
 #define __imagedit__RemoveRedCommand__
 
 #include <iostream>
-#include "Interface_ImageComand.h"
+#include "Interface_ImageCommand.h"
 
 class RemoveRedCommand : public Interface_ImageCommand {
 public:

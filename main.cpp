@@ -8,16 +8,14 @@
 
 #include <iostream>
 #include "Parser.h"
-#include "Interface_ImageComand.h"
-#include "RemoveRedCommand.h"
-#include <map>
+#include "Manager.h"
 
 int main(int argc, const char * argv[])
 {
 
     
-    std::map<char *, Interface_ImageCommand*> commands;
-    commands["RemoveRedCommand"] = new RemoveRedCommand();
+//    std::map<char *, Interface_ImageCommand*> commands;
+//    commands["RemoveRedCommand"] = new RemoveRedCommand();
     
     
     Parser* p = new Parser();

@@ -6,6 +6,6 @@
 //  Copyright (c) 2013 Sean Wareham. All rights reserved.
 //
 
-#include "Interface_ImageComand.h"
+#include "Interface_ImageCommand.h"
 
 Interface_ImageCommand::~Interface_ImageCommand(){};
