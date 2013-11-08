@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Parser.h"
 #include "Manager.h"
+#include "BlurCommand.h"
 
 int main(int argc, const char * argv[])
 {
@@ -20,6 +21,10 @@ int main(int argc, const char * argv[])
     
     Parser* p = new Parser(m);
     p->parse(argc, argv);
+    
+    BlurCommand* b = new BlurCommand("box", 10);
+//    b->setFlag("f", "val");
+    
     return 0;
 }
 
