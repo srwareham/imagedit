@@ -10,9 +10,9 @@
 #define __imagedit__RemoveRedCommand__
 
 #include <iostream>
-#include "Interface_ImageCommand.h"
+#include "ImageCommand.h"
 
-class RemoveRedCommand : public Interface_ImageCommand {
+class RemoveRedCommand : public ImageCommand {
 public:
     RemoveRedCommand(void);
     void OverrideMe(void);

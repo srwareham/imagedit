@@ -11,8 +11,8 @@
 
 
 Manager::Manager() {
-    myPossibleCommands = new std::map<std::string, Interface_ImageCommand*>;
-    myActiveCommands = new std::vector<Interface_ImageCommand*>;
+    myPossibleCommands = new std::map<std::string, ImageCommand*>;
+    myActiveCommands = new std::vector<ImageCommand*>;
     buildMyPossibleCommands();
 };
 
@@ -22,11 +22,11 @@ bool Manager::isPossibleCommand(std::string referenceName){
 }
 //Used to get an instance of a command and add the command to the active commands
 //hmm this inheriently can only use a given command once in a series.  May need to switch to factories. We'll see.
-Interface_ImageCommand* getReferencedCommand(std::string referenceName){
+ImageCommand* getReferencedCommand(std::string referenceName){
     return NULL;
 }
 
-void Manager::addPossibleCommand(std::string referenceName, Interface_ImageCommand* commandInstance){
+void Manager::addPossibleCommand(std::string referenceName, ImageCommand* commandInstance){
     myPossibleCommands->insert(std::make_pair(referenceName, commandInstance));
 }
 //This is where new commands can manually be added

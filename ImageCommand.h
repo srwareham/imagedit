@@ -13,11 +13,11 @@
 #include <map>
 #include <string>
 
-class Interface_ImageCommand {
+class ImageCommand {
 protected:
 public:
     virtual void OverrideMe() = 0;
-    virtual ~Interface_ImageCommand();
+    virtual ~ImageCommand();
 };
 
 #endif /* defined(__imagedit__Interface_ImageComand__) */

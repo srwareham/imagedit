@@ -11,9 +11,9 @@
 
 #include <iostream>
 #include <string>
-#include "Interface_ImageCommand.h"
+#include "ImageCommand.h"
 
-class BlurCommand : public Interface_ImageCommand {
+class BlurCommand : public ImageCommand {
 private:
     std::string myFilterType;
     int myFilterR;
