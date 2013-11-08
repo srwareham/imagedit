@@ -20,6 +20,7 @@ private:
 public:
     void OverrideMe();
     BlurCommand(std::string filterType, int filterR);
+    void printMe();
 };
 
 

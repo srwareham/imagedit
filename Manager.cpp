@@ -9,6 +9,7 @@
 #include "Manager.h"
 #include "Parser.h"
 #include "BlurFactory.h"
+#include "BlurCommand.h"
 
 
 
@@ -37,22 +38,38 @@ bool Manager::isPossibleCommand(std::string referenceName){
     return (myCommandFactories->find(referenceName) != myCommandFactories->end());
 }
 
-void Manager::queueCommand(std::string referenceName){
+void Manager::queueCommand(std::string referenceName, std::map<std::string,std::string>* flags){
     if (!isPossibleCommand(referenceName)){
         //TODO:perhaps add some error handling here
         return;
     }else{
         //TODO: not sure this is the correct way to access a map
         Factory* factory = myCommandFactories->at(referenceName);
-        myCommandsToExecute->push_back(factory->buildImageCommand(myCommandMap->at(referenceName)));
+        myCommandsToExecute->push_back(factory->buildImageCommand(flags));
         
     }
+}
+//TODO: rename myCommandMap perhaps.  Somehow describe that it is the inputs for creating commands
+void Manager::buildCommands(){
+    commandMap::iterator iter;
+    for(iter = myCommandMap->begin(); iter != myCommandMap->end(); iter++)
+        std::string comName = iter->first;
+        std::map<std::string,std::string>* flags = iter->second;
+//        queueCommand(comName, flags);//for some reason this does not work
+    
+        
+    
 }
 
 void Manager::run(){
     //ImageIO = parser->getInputPath()
     //for command in commands, command->run(currentImage)
-    
+    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
+    for (int i=0; i< myCommandsToExecute->size(); i++){
+        ImageCommand* command = myCommandsToExecute->at(i);
+        BlurCommand* b = (BlurCommand*) command;
+        b->printMe();
+    }
     
     //ImageIO->write(parser->getOutputPath()
 }
@@ -61,5 +78,6 @@ void Manager::run(){
 int main(int argc, const char * argv[]){
     Manager* m = new Manager();
     m->setMyCommandMap(argc, argv);
+    m->run();
     return EXIT_SUCCESS;
 }

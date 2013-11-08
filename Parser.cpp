@@ -27,9 +27,8 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     //i =0 is just the name of this program. We dont need this.
     myInputPath = allArgs.at(1);
     myOutputPath = allArgs.at(2);
-    //std::map<std::string, std::map<std::string, std::string>>
+    //std::map<std::string, std::map<std::string, std::string>*>
     commandMap* allCommands = new commandMap();
-//    allCommands->insert(std::make_pair("commandName", new std::map<std::string, std::string>()));
     
     std::vector<int> commandIndicies;
     //prev is the index of the first command, and then every ensuing command

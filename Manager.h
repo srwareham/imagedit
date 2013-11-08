@@ -33,7 +33,7 @@ private:
 public:
     Manager(void);
     bool isPossibleCommand(std::string referenceName);
-    void queueCommand(std::string referenceName);
+    void queueCommand(std::string referenceName, std::map<std::string,std::string>* flags);
     void setMyCommandMap(int argc, const char **argv);
     void run();
     

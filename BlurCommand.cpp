@@ -15,3 +15,8 @@ BlurCommand::BlurCommand(std::string filterType, int filterR) : myFilterType(fil
 void BlurCommand::OverrideMe(){
     printf("HEY IM OVVERIDED\n");
 }
+
+void BlurCommand::printMe() {
+    printf("BlurFilter: %s\n" ,myFilterType.c_str());
+    printf("BlurFilterR: %d\n" ,myFilterR);
+}
