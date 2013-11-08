@@ -12,10 +12,13 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Manager.h"
 
 class Parser {
+private:
+    Manager* myManager;
 public:
-    Parser(void);
+    Parser(Manager* manager);
     std::vector<int>* parse (int argc, const char * argv[]);
 };
 

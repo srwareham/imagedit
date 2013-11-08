@@ -16,9 +16,9 @@ int main(int argc, const char * argv[])
     
 //    std::map<char *, Interface_ImageCommand*> commands;
 //    commands["RemoveRedCommand"] = new RemoveRedCommand();
+    Manager* m = new Manager();
     
-    
-    Parser* p = new Parser();
+    Parser* p = new Parser(m);
     p->parse(argc, argv);
     return 0;
 }
