@@ -11,6 +11,9 @@
 #define __imagedit__Image__
 
 #include <iostream>
+#include <vector>
+#include "Pixel.h"
+
 
 class Image {
 private:
@@ -29,6 +32,7 @@ public:
     int getHeight();
     float*** getImage();
     float* getImageDisplayArray();
+    std::vector<Pixel> getPixelArray();
 
 };
 
