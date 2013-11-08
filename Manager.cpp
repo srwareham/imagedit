@@ -52,10 +52,11 @@ void Manager::queueCommand(std::string referenceName, std::map<std::string,std::
 //TODO: rename myCommandMap perhaps.  Somehow describe that it is the inputs for creating commands
 void Manager::buildCommands(){
     commandMap::iterator iter;
-    for(iter = myCommandMap->begin(); iter != myCommandMap->end(); iter++)
+    for(iter = myCommandMap->begin(); iter != myCommandMap->end(); iter++){
         std::string comName = iter->first;
         std::map<std::string,std::string>* flags = iter->second;
-//        queueCommand(comName, flags);//for some reason this does not work
+        queueCommand(comName, flags);//for some reason this does not work
+    }
     
         
     
