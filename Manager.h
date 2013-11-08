@@ -12,18 +12,22 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <vector>
 #include "Interface_ImageCommand.h"
 
 
 class Manager {
 private:
-    std::map<std::string, Interface_ImageCommand*>* myCommands;
-    
+    //A prebuilt instance of every possible command. A little silly to actually instantiate every possible
+    //but this way avoid the need for a factory for each.  Makes it much easier to add a new command.
+    std::map<std::string, Interface_ImageCommand*>* myPossibleCommands;
+    std::vector<Interface_ImageCommand*>* myActiveCommands;
+    void buildMyPossibleCommands();
+    void addPossibleCommand(std::string referenceName, Interface_ImageCommand* commandInstance);
 public:
     Manager(void);
-    void addCommand(std::string referenceName, Interface_ImageCommand* commandInstance);
-    bool isACommand(std::string referenceName);
-    Interface_ImageCommand* getReferencedCommand(std::string referenceName);
+    bool isPossibleCommand(std::string referenceName);
+    Interface_ImageCommand* activateReferencedCommand(std::string referenceName);
 };
 
 #endif /* defined(__imagedit__Manager__) */
