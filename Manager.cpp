@@ -10,6 +10,7 @@
 #include "Parser.h"
 #include "BlurFactory.h"
 #include "BlurCommand.h"
+#include "Image.h"
 
 
 
@@ -22,6 +23,8 @@ Manager::Manager() {
 void Manager::setMyCommandMap(int argc, const char **argv){
     Parser* p = new Parser();
     myCommandMap = p->buildCommandMap(argc, argv);
+    imageIn = p->getInputPath();
+    imageOut = p->getOutputPath();
 }
 
 void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
@@ -57,23 +60,25 @@ void Manager::buildCommands(){
         std::map<std::string,std::string>* flags = iter->second;
         queueCommand(comName, flags);//for some reason this does not work
     }
-    
-        
-    
 }
 
 void Manager::run(){
+
+//    Image* image = new Image(imageIn.c_str());
+    Image* image = NULL;
+    
     buildCommands();
     //ImageIO = parser->getInputPath()
     //for command in commands, command->run(currentImage)
 //    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
+        command->execute(image);
         BlurCommand* b = (BlurCommand*) command;
         b->printMe();
     }
     
-    //ImageIO->write(parser->getOutputPath()
+//    image->write(imageOut.c_str());
 }
 
 

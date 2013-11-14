@@ -12,7 +12,7 @@ BlurCommand::BlurCommand(std::string filterType, int filterR) : myFilterType(fil
     printf("hey you made a: %s with R: %d", filterType.c_str(), filterR);
 };
 
-void BlurCommand::OverrideMe(){
+void BlurCommand::execute(Image* image){
     printf("HEY IM OVVERIDED\n");
 }
 

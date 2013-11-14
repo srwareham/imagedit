@@ -30,6 +30,8 @@ private:
     void defineFactory(std::string referenceName, Factory* factoryInstance);
     void instantiateFactories();
     void buildCommands();
+    std::string imageIn;
+    std::string imageOut;
 public:
     Manager(void);
     bool isPossibleCommand(std::string referenceName);

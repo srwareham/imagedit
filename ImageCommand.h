@@ -12,11 +12,13 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include "Image.h"
 
 class ImageCommand {
 protected:
+    
 public:
-    virtual void OverrideMe() = 0;
+    virtual void execute(Image* image) = 0;
     virtual ~ImageCommand();
 };
 

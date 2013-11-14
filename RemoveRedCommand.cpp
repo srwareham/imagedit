@@ -13,6 +13,6 @@ RemoveRedCommand::RemoveRedCommand(){
 }
 
 
-void RemoveRedCommand::OverrideMe(){
+void RemoveRedCommand::execute(Image* image){
     printf("HEY IM OVVERIDED\n");
 }
