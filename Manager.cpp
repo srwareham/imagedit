@@ -63,9 +63,10 @@ void Manager::buildCommands(){
 }
 
 void Manager::run(){
+    buildCommands();
     //ImageIO = parser->getInputPath()
     //for command in commands, command->run(currentImage)
-    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
+//    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
         BlurCommand* b = (BlurCommand*) command;
