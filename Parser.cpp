@@ -12,22 +12,22 @@ Parser::Parser() {
 };
 
 std::map<std::string, std::string>* Parser::buildFlagMap(std::vector<std::string> flagPairs){
-        printf("flagpairs SIZE: %d\n", (int) flagPairs.size());
+//        printf("flagpairs SIZE: %d\n", (int) flagPairs.size());
     std::map<std::string, std::string>* flags = new std::map<std::string, std::string>();
     if (flagPairs.size() <= 1){
-        printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
+//        printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
         return flags;
     }
     int i = 1;
     while (i < (int) flagPairs.size()-1){
-        printf("I = %d\n", i);
+//        printf("I = %d\n", i);
         std::string flagName = flagPairs.at(i);
         std::string flagVal = flagPairs.at(i+1);
-        printf("FlagName: %s flagVal: %s\n", flagName.c_str(), flagVal.c_str());
+//        printf("FlagName: %s flagVal: %s\n", flagName.c_str(), flagVal.c_str());
         flags->insert(std::make_pair(flagName, flagVal));
         i +=2;
     }
-    printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
+//    printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
     return flags;
 }
 
@@ -60,22 +60,24 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     
     for (int i =3; i< allArgs.size(); i++){
         if (allArgs.at(i) == ","){
-            printf("COMMA AT: %d\n", i);
+//            printf("COMMA AT: %d\n", i);
             commaIndexArray.push_back(i);
             
         }
     }
     
     
-    for (int i=0; i< commaIndexArray.size();i++){
+    for (int i=0; i<= commaIndexArray.size();i++){
         int startIndex;
         int endIndex;
-        
+        //if we are at the beginning, we know the first commandName is after "imageditPath in out"
         if (i ==0){
             startIndex = 3;
+            //otherwise it is right after a comma
         } else {
             startIndex = commaIndexArray.at(i-1) +1;
         }
+        //if this is the last comma, the
         if (i == commaIndexArray.size()){
             endIndex = (int) allArgs.size();
         } else {
