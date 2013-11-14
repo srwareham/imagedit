@@ -11,6 +11,32 @@
 Parser::Parser() {
 };
 
+std::map<std::string, std::string>* Parser::buildFlagMap(std::vector<std::string> flagPairs){
+        printf("flagpairs SIZE: %d\n", (int) flagPairs.size());
+    std::map<std::string, std::string>* flags = new std::map<std::string, std::string>();
+    if (flagPairs.size() <= 1){
+        printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
+        return flags;
+    }
+    int i = 1;
+    while (i < (int) flagPairs.size()-1){
+        printf("I = %d\n", i);
+        std::string flagName = flagPairs.at(i);
+        std::string flagVal = flagPairs.at(i+1);
+        printf("FlagName: %s flagVal: %s\n", flagName.c_str(), flagVal.c_str());
+        flags->insert(std::make_pair(flagName, flagVal));
+        i +=2;
+    }
+    printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
+    return flags;
+}
+
+std::vector<std::string> Parser::subString(int start, int end, std::vector<std::string> inputVector){
+    std::vector<std::string> ans(inputVector.begin() + start, inputVector.begin() + end);
+    return ans;
+}
+
+
 commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     //Every command at least needs  an inputFile, an outputFile, and a commandName
     if (argc <3){
@@ -21,8 +47,8 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     
     
     std::vector<std::string> allArgs(argv, argv + argc);
-    printf("in: %s\n", allArgs.at(1).c_str());
-    printf("out: %s\n", allArgs.at(2).c_str());
+//    printf("in: %s\n", allArgs.at(1).c_str());
+//    printf("out: %s\n", allArgs.at(2).c_str());
     
     //i =0 is just the name of this program. We dont need this.
     myInputPath = allArgs.at(1);
@@ -30,26 +56,37 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     //std::map<std::string, std::map<std::string, std::string>*>
     commandMap* allCommands = new commandMap();
     
-    std::vector<int> commandIndicies;
-    //prev is the index of the first command, and then every ensuing command
-    int prev = 3;
-    for (int index = prev; index < argc; index++) {
-        std::string arg = allArgs.at(index);
-        printf("val: %s\n", arg.c_str());
-        if (arg == ","){
-            std::map<std::string, std::string>* flags = new std::map<std::string, std::string>();
-            std::string commandName = allArgs.at(prev);
-            int i = prev + 1;
-                while (i < index){
-                    std::string flagName = allArgs.at(i);
-                    std::string flagVal = allArgs.at(i);
-                    flags->insert(std::make_pair(flagName, flagVal));
-                    index +=2;
-                }
-            prev = index +1;
-            allCommands->insert(std::make_pair(commandName, flags));
+    std::vector<int> commaIndexArray;
+    
+    for (int i =3; i< allArgs.size(); i++){
+        if (allArgs.at(i) == ","){
+            printf("COMMA AT: %d\n", i);
+            commaIndexArray.push_back(i);
+            
         }
     }
+    
+    
+    for (int i=0; i< commaIndexArray.size();i++){
+        int startIndex;
+        int endIndex;
+        
+        if (i ==0){
+            startIndex = 3;
+        } else {
+            startIndex = commaIndexArray.at(i-1) +1;
+        }
+        if (i == commaIndexArray.size()){
+            endIndex = (int) allArgs.size();
+        } else {
+            endIndex = commaIndexArray.at(i);
+        }
+        std::string commandName = allArgs.at(startIndex);
+        std::vector<std::string> commandArgs = subString(startIndex, endIndex, allArgs);
+        allCommands->insert(std::make_pair(commandName, buildFlagMap(commandArgs)));
+    }
+
+    printf("allcommands size: %d\n", (int) allCommands->size());
 
     hasBeenParsed = true;
     return allCommands;
