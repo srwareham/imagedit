@@ -11,10 +11,29 @@
 
 #include <iostream>
 
-struct Pixel {
+class Pixel {
+private:
     float* r, g, b;
-    int i, j;
+    int i, j;//position based on
+public:
+    Pixel(float r, float g, float b);
+    
+    void setCartCords(int x, int y);
+    void setX();
+    void setY();
+    int getX();
+    int getY();
+    
+    void setI();
+    void setJ();
+    int getI();
+    int getJ();
+    
+    float* R();//this is also used to set..should i use a setter? probably slower
+    float* G();
+    float* B();
+    
 };
-typedef struct pixel* pix;
+
 
 #endif /* defined(__imagedit__Pixel__) */
