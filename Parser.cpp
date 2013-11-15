@@ -84,6 +84,7 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
             endIndex = commaIndexArray.at(i);
         }
         std::string commandName = allArgs.at(startIndex);
+        printf("COMMANDNAME: %s\n", commandName.c_str());
         std::vector<std::string> commandArgs = subString(startIndex, endIndex, allArgs);
         allCommands->insert(std::make_pair(commandName, buildFlagMap(commandArgs)));
     }
