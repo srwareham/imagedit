@@ -25,9 +25,9 @@ private:
     float* imageDisplayArray;
 public:
     Image(int w, int h, int max);
-    Image(const char* file_name);
+    Image(const char* filePath);
     ~Image(void);
-    void writeImage(const char* file_name);
+    void writeImage(const char* filePath);
     int getWidth();
     int getHeight();
     float*** getImage();

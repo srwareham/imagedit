@@ -50,7 +50,7 @@ void Manager::queueCommand(std::string referenceName, std::map<std::string,std::
     }else{
         //TODO: not sure this is the correct way to access a map
         Factory* factory = myCommandFactories->at(referenceName);
-        printf("EXECUING BUILD IMAGE COMMAND(FLAGS)\n");
+//        printf("EXECUING BUILD IMAGE COMMAND(FLAGS)\n");
         myCommandsToExecute->push_back(factory->buildImageCommand(flags));
         
     }
@@ -61,7 +61,7 @@ void Manager::buildCommands(){
     for(iter = myCommandMap->begin(); iter != myCommandMap->end(); iter++){
         std::string comName = iter->first;
         std::map<std::string,std::string>* flags = iter->second;
-        printf("QUEING COMMAND: %s\n", comName.c_str());
+//        printf("QUEING COMMAND: %s\n", comName.c_str());
         queueCommand(comName, flags);//for some reason this does not work
     }
 }
@@ -70,6 +70,7 @@ void Manager::run(){
 
 //    Image* image = new Image(imageIn.c_str());
 //    Image* image = NULL;
+    Image* currentImage = new Image("/Users/srwareham/Desktop/idk.ppm");
     
     buildCommands();
     //ImageIO = parser->getInputPath()
@@ -81,6 +82,7 @@ void Manager::run(){
         BlurCommand* b = (BlurCommand*) command;
         b->printMe();
     }
+    currentImage->writeImage("/Users/srwareham/Desktop/outputPPM.ppm");
     
 //    image->write(imageOut.c_str());
 }
