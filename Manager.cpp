@@ -78,9 +78,9 @@ void Manager::run(){
 //    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
-//        command->execute(image);
-        BlurCommand* b = (BlurCommand*) command;
-        b->printMe();
+        command->execute(currentImage);
+//        BlurCommand* b = (BlurCommand*) command;
+//        b->printMe();
     }
     currentImage->writeImage("/Users/srwareham/Desktop/outputPPM.ppm");
     

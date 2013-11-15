@@ -81,7 +81,7 @@ void Image::writeImage(const char* filePath) {
         exit(1);
     }
     //write ppm header
-    printf("%f",image[0][0][2]*255);
+//    printf("%f",image[0][0][2]*255);
     fprintf(file,"%c%c\n",magic_number[0],magic_number[1]);
     fprintf(file,"#picture made by Sean\n");
     fprintf(file,"%d %d\n",width, height);
@@ -99,5 +99,13 @@ void Image::writeImage(const char* filePath) {
 
 float*** Image::getImage() {
     return image;
+}
+
+int Image::getWidth() {
+    return width;
+}
+
+int Image::getHeight() {
+    return height;
 }
 
