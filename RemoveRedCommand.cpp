@@ -13,6 +13,7 @@ RemoveRedCommand::RemoveRedCommand(){
 }
 
 
-void RemoveRedCommand::execute(Image* image){
+Image* RemoveRedCommand::execute(Image* image){
     printf("HEY IM OVVERIDED\n");
+    return NULL;
 }

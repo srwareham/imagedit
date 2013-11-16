@@ -12,9 +12,10 @@ BlurCommand::BlurCommand(std::string filterType, int filterR) : myFilterType(fil
 //    printf("hey you made a: %s with R: %d", filterType.c_str(), filterR);
 };
 
-void BlurCommand::execute(Image* image){
+Image* BlurCommand::execute(Image* image){
 //    printf("IMAGE HEIGHT: %d\n",image->getHeight());
-    float*** imagef = image->getImage();
+    Image* blurred = new Image(image->getWidth(), image->getHeight(), image->getMax());
+    float*** imagef = blurred->getImage();
     int height = image->getHeight();
     int width = image->getWidth();
 //    printf("HEY IM OVVERIDED\n");
@@ -28,6 +29,7 @@ void BlurCommand::execute(Image* image){
     }
     
 //    return red;
+    return blurred;
 }
 
 void BlurCommand::printMe() {

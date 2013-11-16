@@ -46,9 +46,7 @@ void Manager::queueCommand(std::string referenceName, std::map<std::string,std::
     if (!isPossibleCommand(referenceName)){
         //TODO:perhaps add some error handling here
         return;
-        //TODO: this code is not being reached
     }else{
-        //TODO: not sure this is the correct way to access a map
         Factory* factory = myCommandFactories->at(referenceName);
 //        printf("EXECUING BUILD IMAGE COMMAND(FLAGS)\n");
         myCommandsToExecute->push_back(factory->buildImageCommand(flags));
@@ -70,18 +68,19 @@ void Manager::run(){
 
 //    Image* image = new Image(imageIn.c_str());
 //    Image* image = NULL;
-    Image* currentImage = new Image("/Users/srwareham/Desktop/idk.ppm");
-    
+    Image* originalImage = new Image("/Users/srwareham/Desktop/idk.ppm");
+    Image* currentImage = originalImage;//TODO: create a copy function
     buildCommands();
     //ImageIO = parser->getInputPath()
     //for command in commands, command->run(currentImage)
 //    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
-        command->execute(currentImage);
+        currentImage = command->execute(currentImage);
 //        BlurCommand* b = (BlurCommand*) command;
 //        b->printMe();
     }
+//    currentImage = originalImage;
     currentImage->writeImage("/Users/srwareham/Desktop/outputPPM.ppm");
     
 //    image->write(imageOut.c_str());

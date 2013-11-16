@@ -18,7 +18,7 @@ private:
     std::string myFilterType;
     int myFilterR;
 public:
-    void execute(Image* image);
+    Image* execute(Image* image);
     BlurCommand(std::string filterType, int filterR);
     void printMe();
 };

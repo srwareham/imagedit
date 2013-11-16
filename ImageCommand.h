@@ -18,7 +18,7 @@ class ImageCommand {
 protected:
     
 public:
-    virtual void execute(Image* image) = 0;
+    virtual Image* execute(Image* image) = 0;
     virtual ~ImageCommand();
 };
 

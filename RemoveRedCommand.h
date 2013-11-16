@@ -15,7 +15,7 @@
 class RemoveRedCommand : public ImageCommand {
 public:
     RemoveRedCommand(void);
-    void execute(Image* image);
+    Image* execute(Image* image);
 };
 
 #endif /* defined(__imagedit__RemoveRedCommand__) */

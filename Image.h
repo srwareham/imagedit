@@ -32,6 +32,7 @@ public:
     void writeImage(const char* filePath);
     int getWidth();
     int getHeight();
+    int getMax();
     float*** getImage();
     float* getImageDisplayArray();
     std::vector<Pixel> getPixelArray();

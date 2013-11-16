@@ -72,6 +72,18 @@ Image::Image(const char* filePath){
     
     fclose(file);
 }
+//TODO: destroy pixels too
+Image::~Image(void) {
+    for(int i = 0; i < height; i++) {
+        for(int j = 0; j < width; j++) {
+            delete [] image[i][j];
+        }
+        delete [] image[i];
+    }
+    delete [] image;
+    
+    delete [] imageDisplayArray;
+}
 
 void Image::writeImage(const char* filePath) {
     FILE* file;
@@ -105,19 +117,24 @@ int Image::getWidth() {
     return width;
 }
 
+
 int Image::getHeight() {
     return height;
+}
+
+int Image::getMax() {
+    return max;
 }
 
 void Image::initializePixels(){
     printf("initializingPixels\n");
 }
 
-Pixel* Image::getPixel(int x, int y){
-    if (pixels == NULL){
-        initializePixels();
-    }
-    
-    return pixels[x][y];
-}
+//Pixel* Image::getPixel(int x, int y){
+//    if (pixels == NULL){
+//        initializePixels();
+//    }
+//    
+////    return pixels[x][y];
+//}
 
