@@ -109,3 +109,15 @@ int Image::getHeight() {
     return height;
 }
 
+void Image::initializePixels(){
+    printf("initializingPixels\n");
+}
+
+Pixel* Image::getPixel(int x, int y){
+    if (pixels == NULL){
+        initializePixels();
+    }
+    
+    return pixels[x][y];
+}
+

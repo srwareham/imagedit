@@ -13,7 +13,9 @@
 
 class Pixel {
 private:
-    float* r, g, b;
+    float* r;
+    float* g;
+    float* b;
     int i, j;//position based on
 public:
     Pixel(float r, float g, float b);

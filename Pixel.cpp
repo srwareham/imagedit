@@ -44,19 +44,20 @@ int Pixel::getI(){
     return i;
 }
 
-int getJ(){
+int Pixel::getJ(){
     return j;
 }
 
 //TODO: decide where i want this memory to be allocated. Perhaps on the heap at read time?
 //also need to perhaps have methods return an image instead of modify an existing one
 //this would be much easier for the case of shrinking an image
-float* R(){
+float* Pixel::R(){
     return r;
 }
-float* G(){
+float* Pixel::G(){
     return g;
 }
-float* B(){
+float* Pixel::B(){
     return b;
 }
+

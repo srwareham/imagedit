@@ -23,6 +23,8 @@ private:
     int max;
     float*** image;
     float* imageDisplayArray;
+    float** pixels;
+    void initializePixels();
 public:
     Image(int w, int h, int max);
     Image(const char* filePath);
@@ -33,6 +35,7 @@ public:
     float*** getImage();
     float* getImageDisplayArray();
     std::vector<Pixel> getPixelArray();
+    Pixel* getPixel(int x, int y);
 
 };
 
