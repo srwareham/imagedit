@@ -23,7 +23,7 @@ private:
     int max;
     float*** image;
     float* imageDisplayArray;
-    float** pixels;
+    Pixel** pixels;//is 2d array of Pixels
     void initializePixels();
 public:
     Image(int w, int h, int max);
@@ -37,6 +37,7 @@ public:
     float* getImageDisplayArray();
     std::vector<Pixel> getPixelArray();
     Pixel* getPixel(int x, int y);
+    Pixel** getPixels();
 
 };
 

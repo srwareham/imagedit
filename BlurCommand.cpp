@@ -16,15 +16,18 @@ Image* BlurCommand::execute(Image* image){
 //    printf("IMAGE HEIGHT: %d\n",image->getHeight());
     Image* blurred = new Image(image->getWidth(), image->getHeight(), image->getMax());
     float*** imagef = blurred->getImage();
+    Pixel** ps = image->getPixels();
+    Pixel** newPS = blurred->getPixels();
     int height = image->getHeight();
     int width = image->getWidth();
 //    printf("HEY IM OVVERIDED\n");
 //    printMe();
     for(int i = height-1; i >= 0; i--) {
         for(int j = 0; j<width; j++) {
-            imagef[i][j][0] = 0; //r
-            imagef[i][j][1] = imagef[i][j][1]; //g
-            imagef[i][j][1] = imagef[i][j][2]; //b
+            newPS[i][j] = ps[i][j];
+//            imagef[i][j][0] = 0; //r
+//            imagef[i][j][1] = imagef[i][j][1]; //g
+//            imagef[i][j][1] = imagef[i][j][2]; //b
         }
     }
     

@@ -18,7 +18,7 @@ private:
     float* b;
     int i, j;//position based on
 public:
-    Pixel(float r, float g, float b);
+    Pixel(float* r, float* g, float* b);
     
     void setCartCords(int x, int y);
     void setX();

@@ -108,6 +108,15 @@ void Image::writeImage(const char* filePath) {
     fclose(file);
     
 }
+//returns 2d array of pixels
+Pixel** Image::getPixels() {
+    if (pixels == NULL){
+        initializePixels();
+    } else {
+        return pixels;
+    }
+    return NULL;
+}
 
 float*** Image::getImage() {
     return image;
@@ -127,7 +136,12 @@ int Image::getMax() {
 }
 
 void Image::initializePixels(){
-    printf("initializingPixels\n");
+    pixels = new Pixel*[height];//TODO: not sure if this is correct
+    for(int i = 0; i < height; i++) {
+        for(int j = 0; j < width; j++) {
+            pixels[i][j] = Pixel(&image[i][j][0], &image[i][j][1], &image[i][j][2]);
+        }
+    }
 }
 
 //Pixel* Image::getPixel(int x, int y){

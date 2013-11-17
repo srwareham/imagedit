@@ -8,7 +8,7 @@
 
 #include "Pixel.h"
 
-Pixel::Pixel(float r, float g, float b){
+Pixel::Pixel(float* r, float* g, float* b) : r(r), g(g), b(b){
     
 }
 
