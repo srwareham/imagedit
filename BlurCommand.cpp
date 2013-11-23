@@ -46,11 +46,11 @@ public:
                 //sigma = 1
                 val =(1.0-fabs(x/(float)filter_r))/(float) filter_r;
             }
-            else if (filterType == std::string("GAUSSIAN")) {
+            else if (filterType == std::string("GAUSSIAN") || filterType == std::string("GAUSS")) {
                 val =(1.0/sqrt(2.0*PI))*exp(-(x*x/2.0));
             }
             else {
-                printf("BAD ENUM TYPE");
+                printf("BAD ENUM TYPE: %s\n", filterType.c_str());
             }
             //        printf("VAL[%d]: %f\n", x, val);
             //set the weight to the desired value
