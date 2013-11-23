@@ -94,8 +94,10 @@ void Image::writeImage(const char* filePath) {
     }
     //write ppm header
 //    printf("%f",image[0][0][2]*255);
+    magic_number[0] = 'P';
+    magic_number[1] = '3';
     fprintf(file,"%c%c\n",magic_number[0],magic_number[1]);
-    fprintf(file,"#picture made by Sean\n");
+    fprintf(file,"#picture made by imagedit\n");
     fprintf(file,"%d %d\n",width, height);
     fprintf(file,"%d\n",255);
     //write pixel values
