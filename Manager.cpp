@@ -11,6 +11,7 @@
 #include "BlurFactory.h"
 #include "BlurCommand.h"
 #include "Image.h"
+#include "ApplyDiscreteFilterFactory.h"
 
 
 
@@ -35,6 +36,7 @@ void Manager::defineFactory(std::string referenceName, Factory* factoryInstance)
 //referenceName is exactly what will be typed in the commandline. case sensitive.
 void Manager::instantiateFactories(){
     defineFactory("Blur", new BlurFactory());
+    defineFactory("discrete", new ApplyDiscreteFilterFactory);
 }
 
 bool Manager::isPossibleCommand(std::string referenceName){
