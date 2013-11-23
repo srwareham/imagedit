@@ -76,6 +76,7 @@ void Manager::run(){
 //    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
+        printf("%s\n",command->printMessage().c_str());
         currentImage = command->execute(currentImage);
 //        BlurCommand* b = (BlurCommand*) command;
 //        b->printMe();

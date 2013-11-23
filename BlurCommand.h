@@ -20,6 +20,7 @@ private:
 public:
     Image* execute(Image* image);
     BlurCommand(std::string filterType, int filterR);
+    std::string printMessage();
     void printMe();
 };
 

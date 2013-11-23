@@ -17,3 +17,8 @@ Image* RemoveRedCommand::execute(Image* image){
     printf("HEY IM OVVERIDED\n");
     return NULL;
 }
+
+std::string RemoveRedCommand::printMessage(){
+    return "Removing Red from Pixels";
+}
+
