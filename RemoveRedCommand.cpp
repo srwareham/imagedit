@@ -14,7 +14,20 @@ RemoveRedCommand::RemoveRedCommand(){
 
 
 Image* RemoveRedCommand::execute(Image* image){
-    printf("HEY IM OVVERIDED\n");
+    Image* red = new Image(image->getWidth(), image->getHeight(), image->getMax());
+    float*** newImage = red->getImage();
+    float*** originalImage = image->getImage();
+    int height = image->getHeight();
+    int width = image->getWidth();
+    for(int i = height-1; i >= 0; i--) {
+        for(int j = 0; j<width; j++) {
+            newImage[i][j][0] = 0; //r
+            newImage[i][j][1] = originalImage[i][j][1]; //g
+            newImage[i][j][2] = originalImage[i][j][2]; //b
+        }
+    }
+    
+    return red;
     return NULL;
 }
 
