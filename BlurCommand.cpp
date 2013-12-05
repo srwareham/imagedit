@@ -155,8 +155,13 @@ void BlurCommand::printMe() {
     printf("BlurFilter: %s\n" ,myFilterType.c_str());
     printf("BlurFilterR: %d\n" ,myFilterR);
 }
-
-std::string BlurCommand::printMessage() {
+std::string BlurCommand::getStartMessage(){
+    char buffer [100];
+    int n;
+    n = snprintf(buffer, 100, "Blurring Image with filter: %s and R: %d\n", myFilterType.c_str(), myFilterR);
+    return std::string(buffer);
+}
+std::string BlurCommand::getEndMessage(){
     char buffer [100];
     int n;
     n = snprintf(buffer, 100, "Blurring Image with filter: %s and R: %d\n", myFilterType.c_str(), myFilterR);

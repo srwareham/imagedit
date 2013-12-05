@@ -23,8 +23,8 @@ private:
 public:
     Image* execute(Image* image);
     ConvolveCommand(std::string filterType, int filterR);
-    std::string printMessage();
-    void printMe();
+    std::string getStartMessage();
+    std::string getEndMessage();
 };
 
 #endif /* defined(__imagedit__ConvolveCommand__) */

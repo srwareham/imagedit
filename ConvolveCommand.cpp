@@ -150,9 +150,25 @@ Image* ConvolveCommand::convolveSeperable(Image* image, Filter* f){
 
 Image* ConvolveCommand::execute(Image* image){
     Filter* f = new Filter(myFilterType, myFilterR);
+    //this allows us to see what the filter believes the r is.  Is useful for presets where the filter r is changed.
+    myFilterR = f->getFilterR();
     if (f->isSeperable()){
         return convolveSeperable(image, f);
     }else{
         return convolveNonSeperable(image, f);
     }
+}
+//virtual std::string getStartMessage() = 0;
+std::string ConvolveCommand::getEndMessage(){
+    char buffer [100];
+    int n;
+    n = snprintf(buffer, 100, "Convolved Image with R= %d", myFilterR);
+    return std::string(buffer);
+}
+
+std::string ConvolveCommand::getStartMessage(){
+    char buffer [100];
+    int n;
+    n = snprintf(buffer, 100, "Convolving Image with filter: \"%s\"", myFilterType.c_str());
+    return std::string(buffer);
 }

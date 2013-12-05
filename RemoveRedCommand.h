@@ -16,7 +16,8 @@ class RemoveRedCommand : public ImageCommand {
 public:
     RemoveRedCommand(void);
     Image* execute(Image* image);
-    std::string printMessage();
+    std::string getStartMessage();
+    std::string getEndMessage();
 };
 
 #endif /* defined(__imagedit__RemoveRedCommand__) */

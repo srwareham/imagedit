@@ -11,7 +11,7 @@
 #include "BlurFactory.h"
 #include "BlurCommand.h"
 #include "Image.h"
-#include "ApplyDiscreteFilterFactory.h"
+#include "ConvolveFactory.h"
 
 
 
@@ -36,7 +36,7 @@ void Manager::defineFactory(std::string referenceName, Factory* factoryInstance)
 //referenceName is exactly what will be typed in the commandline. case sensitive.
 void Manager::instantiateFactories(){
     defineFactory("Blur", new BlurFactory());
-    defineFactory("discrete", new ApplyDiscreteFilterFactory);
+    defineFactory("convolve", new ConvolveFactory());
 }
 
 bool Manager::isPossibleCommand(std::string referenceName){
@@ -78,8 +78,9 @@ void Manager::run(){
 //    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
-        printf("%s\n",command->printMessage().c_str());
+        printf("%s\n",command->getStartMessage().c_str());
         currentImage = command->execute(currentImage);
+        printf("%s\n",command->getEndMessage().c_str());
 //        BlurCommand* b = (BlurCommand*) command;
 //        b->printMe();
     }

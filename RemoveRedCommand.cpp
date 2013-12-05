@@ -31,7 +31,10 @@ Image* RemoveRedCommand::execute(Image* image){
     return NULL;
 }
 
-std::string RemoveRedCommand::printMessage(){
-    return "Removing Red from Pixels";
+std::string RemoveRedCommand::getStartMessage(){
+    return "removing red";
+};
+std::string RemoveRedCommand::getEndMessage(){
+    return "removed red";
 }
 

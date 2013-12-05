@@ -19,7 +19,8 @@ protected:
     
 public:
     virtual Image* execute(Image* image) = 0;
-    virtual std::string printMessage() = 0;
+    virtual std::string getStartMessage() = 0;
+    virtual std::string getEndMessage() = 0;
     virtual ~ImageCommand();
 };
 
