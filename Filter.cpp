@@ -16,15 +16,14 @@ void Filter::buildFilterValues(){
     if (myFilterName == "sharpen"){
         temp =
         {
-            {-1, -1, -1, -1, -1},
-            {-1,  2,  2,  2, -1},
-            {-1,  2,  8,  2, -1},
-            {-1,  2,  2,  2, -1},
-            {-1, -1, -1, -1, -1},
+            {-1, -1, -1},
+            {-1,  9, -1},
+            {-1, -1, -1}
         };
-        myFilterR = 2;
-        myScalar =1.0/8.0;
+        
+        myScalar = 1.0;
         myBrightnessOffset = 0.0;
+        myFilterR = 1;
         
         
     }else if( myFilterName == "emboss"){
@@ -39,6 +38,19 @@ void Filter::buildFilterValues(){
         myBrightnessOffset = 128.0;
         
       //default do nothing
+    }else if ( myFilterName == "showhedges"){
+        temp =
+        {
+            {0,  0,  0,  0,  0},
+            {0,  0,  0,  0,  0},
+            {-1, -1,  2,  0,  0},
+            {0,  0,  0,  0,  0},
+            {0,  0,  0,  0,  0},
+        };
+        myFilterR = 2;
+        myScalar = 1.0;
+        myBrightnessOffset = 0.0;
+    
     }else{
         temp =
         {
@@ -48,7 +60,7 @@ void Filter::buildFilterValues(){
         };
         myFilterR =1;
         myScalar =1.0;
-        myBrightnessOffset = 0;
+        myBrightnessOffset = 0.0;
     }
 
     //set my filter values to be whatever is desired
