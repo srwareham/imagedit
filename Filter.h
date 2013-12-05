@@ -20,17 +20,19 @@ protected:
     double myWidthScalingFactor = 1.0;
     std::string myFilterName;
     std::vector<double>* myWeights;
-    bool seperable = false;
+    std::vector<std::vector<double>>* myFilterValues;
+    void buildFilterValues();
+    void buildSeperableValues();
     double myScalar =1.0;
     double myBrightnessOffset = 0.0;
     
 public:
-    Filter(std::string filteNname, int filterR);
-    double** getDiscreteArray();
+    Filter(std::string filterNname, int filterR);
     int getFilterR();
     double getHeightScalingFactor();
     double getWidthScalingFactor();
     std::vector<double>* getSeperableVector();
+    std::vector<std::vector<double>>* getFilterArray();
     virtual ~Filter();
     bool isSeperable();
     double getBrightnessOffset();
