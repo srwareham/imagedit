@@ -14,7 +14,6 @@
 #include <string>
 #include <vector>
 #include "Factory.h"
-#include "ImageCommand.h"
 #include "References.h"
 #include "Parser.h"
 
@@ -23,20 +22,12 @@ class Manager {
     //(command referenceName, map<CommandFlag,flagVal>)
 //    typedef std::map<std::string, std::map<std::string, std::string>> commandMap;
 private:
-    std::map<std::string, Factory*>* myCommandFactories;
     std::vector<ImageCommand*>* myCommandsToExecute;
     commandMap* myCommandMap;
-    
-    void defineFactory(std::string referenceName, Factory* factoryInstance);
-    void instantiateFactories();
-    void buildCommands();
     std::string imageIn;
     std::string imageOut;
 public:
-    Manager(void);
-    bool isPossibleCommand(std::string referenceName);
-    void queueCommand(std::string referenceName, std::map<std::string,std::string>* flags);
-    void setMyCommandMap(int argc, const char **argv);
+    Manager(int argc, const char * argv[]);
     void run();
     
 };

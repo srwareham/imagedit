@@ -8,101 +8,45 @@
 
 #include "Manager.h"
 #include "Parser.h"
-#include "BlurFactory.h"
-#include "BlurCommand.h"
 #include "Image.h"
-#include "ConvolveFactory.h"
-#include "BilinearScaleFactory.h"
 #include "FactoryManager.h"
+#include "CommandManager.h"
 
 
 
-Manager::Manager() {
+Manager::Manager(int argc, const char * argv[]) {
+    //gather the factories necessary for constructing commands
     FactoryManager* fm = new FactoryManager();
-    myCommandFactories = fm->getFactories();
     
-//    myCommandFactories = new std::map<std::string, Factory*>;
-    myCommandsToExecute = new std::vector<ImageCommand*>;
-//    instantiateFactories();
-};
-/*
- Call the parser and obtain the input parameters.  myCommandMap is a map of maps.  The inner map being a flag paired to its corresponding value.
- And the outer map having key command name and value being the corresponding inner map.
- */
-void Manager::setMyCommandMap(int argc, const char **argv){
+    //Parse and construct commands
+    CommandManager* cm = new CommandManager(fm->getFactories());
     Parser* p = new Parser();
-    myCommandMap = p->buildCommandMap(argc, argv);
+    myCommandsToExecute = cm->getCommandsToExecute(p->buildCommandMap(argc, argv));
+    
+    
+    //Define input and outputPaths
+    //these MUST be called after p->buildCommandMap
     imageIn = p->getInputPath();
     imageOut = p->getOutputPath();
-}
+};
 
-//void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
-//    myCommandFactories->insert(std::make_pair(referenceName, factoryInstance));
-//}
-
-//This is where new Commands are defined.  Simply create a class, a factory for it, and then instantiate a factory here
-//referenceName is exactly what will be typed in the commandline. case sensitive.
-//void Manager::instantiateFactories(){
-//    defineFactory("Blur", new BlurFactory());
-//    defineFactory("convolve", new ConvolveFactory());
-//    defineFactory("scale", new BilinearScaleFactory());
-//}
-
-bool Manager::isPossibleCommand(std::string referenceName){
-    
-    return (myCommandFactories->find(referenceName) != myCommandFactories->end());
-}
-
-void Manager::queueCommand(std::string referenceName, std::map<std::string,std::string>* flags){
-    if (!isPossibleCommand(referenceName)){
-        //TODO:perhaps add some error handling here
-        return;
-    }else{
-        Factory* factory = myCommandFactories->at(referenceName);
-//        printf("EXECUING BUILD IMAGE COMMAND(FLAGS)\n");
-        myCommandsToExecute->push_back(factory->buildImageCommand(flags));
-        
-    }
-}
-//TODO: rename myCommandMap perhaps.  Somehow describe that it is the inputs for creating commands
-void Manager::buildCommands(){
-    commandMap::iterator iter;
-    for(iter = myCommandMap->begin(); iter != myCommandMap->end(); iter++){
-        std::string comName = iter->first;
-        std::map<std::string,std::string>* flags = iter->second;
-//        printf("QUEING COMMAND: %s\n", comName.c_str());
-        queueCommand(comName, flags);//for some reason this does not work
-    }
-}
-
+//Begin executing the commands
 void Manager::run(){
-
-//    Image* image = new Image(imageIn.c_str());
-//    Image* image = NULL;
-    Image* originalImage = new Image("/Users/srwareham/Desktop/idk.ppm");
-    Image* currentImage = originalImage;//TODO: create a copy function
-    buildCommands();
-    //ImageIO = parser->getInputPath()
-    //for command in commands, command->run(currentImage)
-//    printf("Commands Built: %d\n", (int) myCommandsToExecute->size());
+    //load the desired image
+    Image* originalImage = new Image(imageIn.c_str());//("/Users/srwareham/Desktop/idk.ppm");
+    Image* currentImage = originalImage;
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
         printf("%s\n",command->getStartMessage().c_str());
         currentImage = command->execute(currentImage);
         printf("%s\n",command->getEndMessage().c_str());
-//        BlurCommand* b = (BlurCommand*) command;
-//        b->printMe();
     }
-//    currentImage = originalImage;
-    currentImage->writeImage("/Users/srwareham/Desktop/outputPPM.ppm");
-    
-//    image->write(imageOut.c_str());
+    currentImage->writeImage(imageOut.c_str());
 }
 
 
 int main(int argc, const char * argv[]){
-    Manager* m = new Manager();
-    m->setMyCommandMap(argc, argv);
+    Manager* m = new Manager(argc, argv);
     m->run();
     return EXIT_SUCCESS;
 }
