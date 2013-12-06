@@ -17,6 +17,7 @@ private:
     int myNewH, myNewW;
     double scaleByPercent = -1;//must be positive to be valid
     double newPixelValue(double p00, double p01, double p10, double p11);
+    inline float interpolate(float val1, float val2, float coord1, float coord2, float dist);
 public:
     Image* execute(Image* image);
     BilinearScaleCommand(int newH, int newW);

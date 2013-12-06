@@ -8,6 +8,15 @@
 
 #include "BilinearScaleCommand.h"
 
+inline float BilinearScaleCommand::interpolate( float val1, float val2, float coord1, float coord2, float dist){
+    
+    float seperation = coord2 - coord1;
+    
+    float slope = (val2 - val1) / seperation;
+    
+    return dist * slope;
+}
+
 
 Image* BilinearScaleCommand::execute(Image* image){
     int origWidth = image->getWidth();
@@ -72,6 +81,10 @@ Image* BilinearScaleCommand::execute(Image* image){
             newRed = (r1 + r2 + r3 + r4)/4.0;
             newGreen = (g1 + g2 + g3 + g4)/4.0;
             newBlue = (b1 + b2 + b3 + b4)/4.0;
+//            newRed = interpolate(r1, r2, 0, 0, .5);
+//            newGreen = interpolate(g1, g2, 0, 0, .5);
+//            newBlue = interpolate(b1, b2, 0, 0, .5);
+            
             
             newImage[i][j][0] = newRed;
             newImage[i][j][1] = newGreen;
