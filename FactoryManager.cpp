@@ -9,7 +9,6 @@
 #include "FactoryManager.h"
 #include "ConvolveFactory.h"
 #include "BilinearScaleFactory.h"
-#include "FactoryManager.h"
 
 FactoryManager::FactoryManager(){
     myCommandFactories = new std::map<std::string, Factory*>();

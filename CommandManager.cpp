@@ -28,7 +28,6 @@ void CommandManager::queueCommand(std::string referenceName, std::map<std::strin
     }
 }
 
-
 std::vector<ImageCommand*>* CommandManager::getCommandsToExecute(commandMap* commandMap){
     std::vector<ImageCommand*>* commandsToExecute = new std::vector<ImageCommand*>();
     commandMap::iterator iter;

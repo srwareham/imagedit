@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <vector>
-#include "Pixel.h"
 
 
 class Image {
@@ -23,8 +22,6 @@ private:
     int max;
     float*** image;
     float* imageDisplayArray;
-    Pixel** pixels;//is 2d array of Pixels
-    void initializePixels();
 public:
     Image(int w, int h, int max);
     Image(int w, int h);
@@ -36,10 +33,6 @@ public:
     int getMax();
     float*** getImage();
     float* getImageDisplayArray();
-    std::vector<Pixel> getPixelArray();
-    Pixel* getPixel(int x, int y);
-    Pixel** getPixels();
-
 };
 
 

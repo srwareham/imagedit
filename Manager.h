@@ -13,17 +13,13 @@
 #include <map>
 #include <string>
 #include <vector>
-#include "Factory.h"
-#include "References.h"
 #include "Parser.h"
+#include "ImageCommand.h"
 
 
 class Manager {
-    //(command referenceName, map<CommandFlag,flagVal>)
-//    typedef std::map<std::string, std::map<std::string, std::string>> commandMap;
 private:
     std::vector<ImageCommand*>* myCommandsToExecute;
-    commandMap* myCommandMap;
     std::string imageIn;
     std::string imageOut;
 public:

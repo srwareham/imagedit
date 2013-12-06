@@ -13,7 +13,6 @@
 #include <map>
 #include <string>
 #include "Factory.h"
-#include "ImageCommand.h"
 
 class FactoryManager {
     //(command referenceName, map<CommandFlag,flagVal>)
