@@ -27,7 +27,7 @@ Image::Image(int w, int h, int m =3) {
 }
 
 Image::Image(int w, int h){
-    Image::Image(w,h,3);
+    Image::Image(w,h,255);
 }
 
 Image::Image(const char* filePath){
