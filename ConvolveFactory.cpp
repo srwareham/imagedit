@@ -15,7 +15,7 @@ ConvolveFactory::ConvolveFactory(){};
 
 ImageCommand* ConvolveFactory::buildImageCommand(std::map<std::string, std::string>* flagMap){
     std::string filterType = "Box";
-    int filterR = 1;
+    int filterR = 2;
     //    printf("insidebuildimagecommand\n");
     
     

@@ -145,97 +145,12 @@ Filter::Filter(std::string filterName, int filterR = -1): myFilterName(filterNam
     }else{
         buildFilterValues();
     }
-    
 };
 
 std::vector<std::vector<double>>* Filter::getFilterArray(){
     return myFilterValues;
 }
 
-
-
-//TODO: hopefully be able to clean this up so that only the actual array and the offsets are needed. C++ primitaves are...primative.
-//it may seem odd to define some variables in a getter.  but we dont want it in the constructor in the cases of when this is a seperable filter.  Could just move an if check in the constructor.
-
-/*
-double** Filter::getDiscreteArray(){
-    
-    
-    if ( myFilterName == "sharpen"){
-        myFilterR = 4;
-        const int filterHeight = 5;
-        const int filterWidth = 5;
-        
-        double** answer = new double*[filterHeight];
-        const double filter[filterHeight][filterWidth] =
-        {
-            -1, -1, -1, -1, -1,
-            -1,  2,  2,  2, -1,
-            -1,  2,  8,  2, -1,
-            -1,  2,  2,  2, -1,
-            -1, -1, -1, -1, -1,
-        };
-        for (int i =0; i < filterHeight; i++){
-            for (int j = 0; j < filterWidth; j++){
-                answer[i][j] = filter[i][j];
-            }
-        }
-        
-        myScalar =1.0/8.0;
-        myBrightnessOffset = 0.0;
-        return answer;
-    } else if ( myFilterName == "emboss"){
-        myFilterR = 1;
-        const int filterHeight = 3;
-        const int filterWidth = 3;
-        
-        double** answer = new double*[filterHeight];
-        const double filter[filterWidth][filterHeight] =
-        {
-            -1, -1,  0,
-            -1,  0,  1,
-            0,  1,  1
-        };
-        for (int i =0; i < filterHeight; i++){
-            for (int j = 0; j < filterWidth; j++){
-                answer[i][j] = filter[i][j];
-            }
-        }
-        
-        myScalar =1.0;
-        myBrightnessOffset = 128.0;
-        return answer;
-        //default behavior: do nothing
-    } else {
-        myFilterR = 1;
-        const int filterHeight = 3;
-        const int filterWidth = 3;
-        
-        double** answer = new double*[filterHeight];
-        const double filter[filterWidth][filterHeight] =
-        {
-            0, 0, 0,
-            0, 1, 0,
-            0, 0, 0
-        };
-        for (int i =0; i < filterHeight; i++){
-            for (int j = 0; j < filterWidth; j++){
-                answer[i][j] = filter[i][j];
-            }
-        }
-        
-        myScalar =1.0;
-        myBrightnessOffset = 0;
-        return answer;
-    }
-    
-    
-    
-    
-    
-    return NULL;
-}
- */
 
 int Filter::getFilterR(){
     return myFilterR;
@@ -251,11 +166,11 @@ double Filter::getWidthScalingFactor(){
 std::vector<double>* Filter::getSeperableVector(){
     if (isSeperable()){
         if (myWeights != NULL){
-//            buildMyWeights();
-            printf("NEED TO BUILD WEIGHTS");
+            buildSeperableValues();
         }
         return myWeights;
     } else {
+        //TODO: perhaps add error handling
             return NULL;
     }
 }
