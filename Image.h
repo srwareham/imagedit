@@ -27,6 +27,7 @@ private:
     void initializePixels();
 public:
     Image(int w, int h, int max);
+    Image(int w, int h);
     Image(const char* filePath);
     ~Image(void);
     void writeImage(const char* filePath);

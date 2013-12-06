@@ -8,7 +8,7 @@
 
 #include "Image.h"
 
-Image::Image(int w, int h, int m) {
+Image::Image(int w, int h, int m =3) {
     width = w;
     height = h;
     max = m;
@@ -23,6 +23,10 @@ Image::Image(int w, int h, int m) {
         }
     }
     imageDisplayArray = NULL;
+}
+
+Image::Image(int w, int h){
+    Image::Image(w,h,3);
 }
 
 Image::Image(const char* filePath){

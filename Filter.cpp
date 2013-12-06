@@ -50,7 +50,31 @@ void Filter::buildFilterValues(){
         myFilterR = 2;
         myScalar = 1.0;
         myBrightnessOffset = 0.0;
-    
+        
+    }else if (myFilterName == "showvedges"){
+        temp =
+        {
+            {0,  0,  -1,  0,  0},
+            {0,  0,  -1,  0,  0},
+            {0,  0,   2,  0,  0},
+            {0,  0,   0,  0,  0},
+            {0,  0,   0,  0,  0},
+        };
+        myFilterR = 2;
+        myScalar = 1.0;
+        myBrightnessOffset = 0.0;
+    }else if( myFilterName == "justedges"){
+        temp =
+        {
+            {0,  0,  0,  0,  1},
+            {0,  0,  0,  1,  0},
+            {0,  0,   0,  0,  0},
+            {0,  0,   0,  0,  0},
+            {0,  0,   0,  0,  0},
+        };
+        myFilterR = 2;
+        myScalar = 1.0;
+        myBrightnessOffset = 0.0;
     }else{
         temp =
         {

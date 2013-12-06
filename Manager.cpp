@@ -12,15 +12,23 @@
 #include "BlurCommand.h"
 #include "Image.h"
 #include "ConvolveFactory.h"
+#include "BilinearScaleFactory.h"
+#include "FactoryManager.h"
 
 
 
 Manager::Manager() {
-    myCommandFactories = new std::map<std::string, Factory*>;
+    FactoryManager* fm = new FactoryManager();
+    myCommandFactories = fm->getFactories();
+    
+//    myCommandFactories = new std::map<std::string, Factory*>;
     myCommandsToExecute = new std::vector<ImageCommand*>;
-    instantiateFactories();
+//    instantiateFactories();
 };
-
+/*
+ Call the parser and obtain the input parameters.  myCommandMap is a map of maps.  The inner map being a flag paired to its corresponding value.
+ And the outer map having key command name and value being the corresponding inner map.
+ */
 void Manager::setMyCommandMap(int argc, const char **argv){
     Parser* p = new Parser();
     myCommandMap = p->buildCommandMap(argc, argv);
@@ -28,16 +36,17 @@ void Manager::setMyCommandMap(int argc, const char **argv){
     imageOut = p->getOutputPath();
 }
 
-void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
-    myCommandFactories->insert(std::make_pair(referenceName, factoryInstance));
-}
+//void Manager::defineFactory(std::string referenceName, Factory* factoryInstance){
+//    myCommandFactories->insert(std::make_pair(referenceName, factoryInstance));
+//}
 
 //This is where new Commands are defined.  Simply create a class, a factory for it, and then instantiate a factory here
 //referenceName is exactly what will be typed in the commandline. case sensitive.
-void Manager::instantiateFactories(){
-    defineFactory("Blur", new BlurFactory());
-    defineFactory("convolve", new ConvolveFactory());
-}
+//void Manager::instantiateFactories(){
+//    defineFactory("Blur", new BlurFactory());
+//    defineFactory("convolve", new ConvolveFactory());
+//    defineFactory("scale", new BilinearScaleFactory());
+//}
 
 bool Manager::isPossibleCommand(std::string referenceName){
     
