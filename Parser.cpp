@@ -94,13 +94,13 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     hasBeenParsed = true;
     
     //super janky patch so single argument commands will usually work.  Was not part of original design consideration...but it works!
-//    if (allArgs.size() == 5){
-//        commandMap* patchMap = new commandMap();
-//        std::map<std::string,std::string>* nested = new std::map<std::string,std::string>();
-//        nested->insert(std::make_pair(allArgs.at(4), ""));//the sole parameter
-//        patchMap->insert(std::make_pair(allArgs.at(3), nested));// the commands name
-//        allCommands = patchMap;
-//    }
+    if (allArgs.size() == 5){
+        commandMap* patchMap = new commandMap();
+        std::map<std::string,std::string>* nested = new std::map<std::string,std::string>();
+        nested->insert(std::make_pair(allArgs.at(4), ""));//the sole parameter
+        patchMap->insert(std::make_pair(allArgs.at(3), nested));// the commands name
+        allCommands = patchMap;
+    }
     
     
     return allCommands;

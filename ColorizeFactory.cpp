@@ -22,24 +22,26 @@ ImageCommand* ColorizeFactory::buildImageCommand(std::map<std::string, std::stri
     s.insert("-grayscale");
     s.insert("-removered");
 
-    //if we are using a preset
-//    if (flagMap->size() ==1){
-//        //default grayscale
-//        
-//        
-//        //this purposedly only supports 1 argument
-//        std::map<std::string, std::string>::iterator iter;
-//        for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
-//            //if the desiredEffect is one of the defined effects
-//            if (s.find(iter->first) != s.end()){
-//                desiredEffect = iter->first;
-//            }
-//            //if multiple colorEffects were input, only the first will be applied
-//        }
-//        return new ColorizeCommand(desiredEffect);
-//        
-//        
-//    }else{
+    //if we are using a preset then we know there is only 1 argment.
+    //this only works when there is no batching.  However, if a dummy value is given
+    //such as "-grayscale PLACE_HOLDER" batching will work
+    if (flagMap->size() ==1){
+        //default grayscale
+        
+        
+        //this purposedly only supports 1 argument
+        std::map<std::string, std::string>::iterator iter;
+        for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
+            //if the desiredEffect is one of the defined effects
+            if (s.find(iter->first) != s.end()){
+                desiredEffect = iter->first;
+            }
+            //if multiple colorEffects were input, only the first will be applied
+        }
+        return new ColorizeCommand(desiredEffect);
+        
+        
+    }else{
         //default do nothing
         double redBias = 1.0 , blueBias = 1.0, greenBias = 1.0;
         
@@ -60,18 +62,14 @@ ImageCommand* ColorizeFactory::buildImageCommand(std::map<std::string, std::stri
                 desiredEffect = iter->first;
                 notRGB = true;
             }
-            
-            
-            
         }
         if (notRGB){
-            printf("tryin this\n");
             return new ColorizeCommand(desiredEffect);
         }
         
         
         return new ColorizeCommand(redBias, greenBias, blueBias);
         
-//    }
+    }
 
 }
