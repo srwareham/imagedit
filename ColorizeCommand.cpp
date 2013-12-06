@@ -23,20 +23,10 @@ void ColorizeCommand::applyColor(float*** newImage, float*** originalImage, int 
             float oldR = originalImage[i][j][0];
             float oldG = originalImage[i][j][1];
             float oldB = originalImage[i][j][2];
-            //            float newR = oldR * 0.393 + oldG * 0.769 + oldB * 0.189; //r
-            //            float newG = oldR * 0.349 + oldG * 0.686 + oldB * 0.168; //g
-            //            float newB = oldR * 0.272 + oldG * 0.534 + oldB * 0.131; //b
-            //cool stuff
-            //            float base = 0.3 * oldR + 0.59 * oldG + 0.11 * oldB;
-            //            float newR = 0.9 * base;
-            //            float newG =  0.1* base;
-            //            float newB =   0.1 * base;
-            
+
             float newR = oldR * redBias;
             float newG = oldG * greenBias;
             float newB = oldB * blueBias;
-            
-            
             if (newR > 255){
                 newR = 255.0;
             }
@@ -46,14 +36,11 @@ void ColorizeCommand::applyColor(float*** newImage, float*** originalImage, int 
             if (newB > 255){
                 newB = 255.0;
             }
-            
             newImage[i][j][0] = newR;
             newImage[i][j][1] = newG;
             newImage[i][j][2] = newB;
         }
     }
-
-    
 }
 
 
@@ -74,36 +61,16 @@ void ColorizeCommand::applyGrayscale(float*** newImage, float*** originalImage, 
     }
 }
 
-void ColorizeCommand::applyRemovered(float*** newImage, float*** originalImage, int height, int width){
-    for(int i = height-1; i >= 0; i--) {
-        for(int j = 0; j<width; j++) {
-            newImage[i][j][0] = 0; //r
-            newImage[i][j][1] = originalImage[i][j][1]; //g
-            newImage[i][j][2] = originalImage[i][j][2]; //b
-        }
-    }
-}
-
-void ColorizeCommand::applySepia(float*** newImage, float*** originalImage, int height, int width){
+void ColorizeCommand::applyNegative(float*** newImage, float*** originalImage, int height, int width){
     for(int i = height-1; i >= 0; i--) {
         for(int j = 0; j<width; j++) {
             float oldR = originalImage[i][j][0];
             float oldG = originalImage[i][j][1];
             float oldB = originalImage[i][j][2];
-//            float newR = oldR * 0.393 + oldG * 0.769 + oldB * 0.189; //r
-//            float newG = oldR * 0.349 + oldG * 0.686 + oldB * 0.168; //g
-//            float newB = oldR * 0.272 + oldG * 0.534 + oldB * 0.131; //b
-            //cool stuff
-//            float base = 0.3 * oldR + 0.59 * oldG + 0.11 * oldB;
-//            float newR = 0.9 * base;
-//            float newG =  0.1* base;
-//            float newB =   0.1 * base;
             
-            float newR = oldR *0.9;
-            float newG = oldG * 0.1;
-            float newB = oldB * 0.1;
-            
-            
+            float newR = 255 - oldR;
+            float newG = 255 - oldG;
+            float newB = 255 - oldB;
             if (newR > 255){
                 newR = 255.0;
             }
@@ -113,13 +80,11 @@ void ColorizeCommand::applySepia(float*** newImage, float*** originalImage, int 
             if (newB > 255){
                 newB = 255.0;
             }
-            
             newImage[i][j][0] = newR;
             newImage[i][j][1] = newG;
             newImage[i][j][2] = newB;
         }
     }
-    
 }
 
 void ColorizeCommand::applyCartoonize(float ***newImage, float ***originalImage, int height, int width){
@@ -159,9 +124,9 @@ Image* ColorizeCommand::execute(Image* image){
     //if this is an existing color scheme
     if (predefined){
         if (myColorEffect == "-removered"){
-            applyRemovered(newImage, originalImage, height, width);
-        }else if( myColorEffect == "-sepia"){
-            applySepia(newImage, originalImage, height, width);
+            applyColor(newImage, originalImage, height, width, 0.0, 1.0, 1.0);
+        }else if( myColorEffect == "-negative"){
+            applyNegative(newImage, originalImage, height, width);
         }else if(myColorEffect == "-grayscale"){
             applyGrayscale(newImage, originalImage, height, width);
         }else if(myColorEffect == "-cartoonize"){

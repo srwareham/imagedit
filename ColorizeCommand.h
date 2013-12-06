@@ -18,9 +18,8 @@ private:
     double myRedBias, myGreenBias, myBlueBias;
     
     void applyColor(float*** newImage, float*** originalImage, int height, int width, double redBias, double greenBias, double blueBias);
-    void applySepia(float*** newImage, float*** originalImage, int height, int width);
+    void applyNegative(float*** newImage, float*** originalImage, int height, int width);
     void applyGrayscale(float*** newImage, float*** originalImage, int height, int width);
-    void applyRemovered(float*** newImage, float*** originalImage, int height, int width);
     void applyCartoonize(float*** newImage, float*** originalImage, int height, int width);
     bool predefined = true;
 public:

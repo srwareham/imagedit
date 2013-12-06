@@ -21,7 +21,7 @@ ImageCommand* ColorizeFactory::buildImageCommand(std::map<std::string, std::stri
         std::string desiredEffect = "-grayscale";
         
         std::set<std::string> s;
-        s.insert("-sepia");
+        s.insert("-negative");
         s.insert("-grayscale");
         s.insert("-removered");
         
