@@ -11,22 +11,17 @@ Parser::Parser() {
 };
 
 std::map<std::string, std::string>* Parser::buildFlagMap(std::vector<std::string> flagPairs){
-//        printf("flagpairs SIZE: %d\n", (int) flagPairs.size());
     std::map<std::string, std::string>* flags = new std::map<std::string, std::string>();
     if (flagPairs.size() <= 1){
-//        printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
         return flags;
     }
     int i = 1;
     while (i < (int) flagPairs.size()-1){
-//        printf("I = %d\n", i);
         std::string flagName = flagPairs.at(i);
         std::string flagVal = flagPairs.at(i+1);
-//        printf("FlagName: %s flagVal: %s\n", flagName.c_str(), flagVal.c_str());
         flags->insert(std::make_pair(flagName, flagVal));
         i +=2;
     }
-//    printf("MADE MAP OF SIZE: %d\n", (int)flags->size());
     return flags;
 }
 
@@ -46,9 +41,7 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     
     
     std::vector<std::string> allArgs(argv, argv + argc);
-//    printf("in: %s\n", allArgs.at(1).c_str());
-//    printf("out: %s\n", allArgs.at(2).c_str());
-    
+
     //i =0 is just the name of this program. We dont need this.
     myInputPath = allArgs.at(1);
     myOutputPath = allArgs.at(2);
@@ -59,7 +52,6 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
     
     for (int i =3; i< allArgs.size(); i++){
         if (allArgs.at(i) == ","){
-//            printf("COMMA AT: %d\n", i);
             commaIndexArray.push_back(i);
             
         }
@@ -84,16 +76,13 @@ commandMap* Parser::buildCommandMap(int argc, const char * argv[]){
         }
   
         std::string commandName = allArgs.at(startIndex) + std::to_string(i);
-//        printf("COMMANDNAME: %s\n", commandName.c_str());
         std::vector<std::string> commandArgs = subString(startIndex, endIndex, allArgs);
         allCommands->insert(std::make_pair(commandName, buildFlagMap(commandArgs)));
     }
 
-//    printf("allcommands size: %d\n", (int) allCommands->size());
-
     hasBeenParsed = true;
     
-    //super janky patch so single argument commands will usually work.  Was not part of original design consideration...but it works!
+    //super janky patch so single argument commands will usually work.  Was not part of original design consideration...but it works (without batch mode)!
     if (allArgs.size() == 5){
         commandMap* patchMap = new commandMap();
         std::map<std::string,std::string>* nested = new std::map<std::string,std::string>();

@@ -33,7 +33,6 @@ ImageCommand* BilinearScaleFactory::buildImageCommand(std::map<std::string, std:
         if (iter->first == "-w") {
             width = atoi(iter->second.c_str());
             haveW = true;
-            //            printf("FilterR: %s\n", iter->second.c_str());
         }
         if (iter->first == "-h"){
             height = atoi(iter->second.c_str());

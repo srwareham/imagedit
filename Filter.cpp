@@ -117,7 +117,6 @@ void Filter::buildSeperableValues(){
     for (int i=0; i<len; i++) {
         //center based index, x
         x = i-myFilterR;
-        //TODO: perhaps add case insensitivity
         if (myFilterName == "box") {
             val =1.0/len;
         }
@@ -131,7 +130,6 @@ void Filter::buildSeperableValues(){
         else {
             printf("BAD ENUM TYPE: %s\n", myFilterName.c_str());
         }
-        //        printf("VAL[%d]: %f\n", x, val);
         //set the weight to the desired value
         myWeights->insert(myWeights->begin() + i, val);
         
@@ -177,7 +175,7 @@ std::vector<double>* Filter::getSeperableVector(){
 }
 
 Filter::~Filter(){
-    //TODO: add delete!
+    //: was not implemented
 }
 
 double Filter::getBrightnessOffset(){

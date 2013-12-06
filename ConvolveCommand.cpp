@@ -12,7 +12,6 @@
 
 
 ConvolveCommand::ConvolveCommand(std::string filterType, int filterR) : myFilterType(filterType), myFilterR(filterR) {
-    //    printf("hey you made a: %s with R: %d", filterType.c_str(), filterR);
 };
 
 Image* ConvolveCommand::convolveNonSeperable(Image* image, Filter* f){
@@ -37,8 +36,6 @@ Image* ConvolveCommand::convolveNonSeperable(Image* image, Filter* f){
         std::vector<double>::iterator col;
         for (row = filterArray->begin(); row != filterArray->end(); ++row) {
             for (col = row->begin(); col != row->end(); ++col) {
-                //                printf("i: %d j: %d  %f\n", (int) (row - filterArray->begin()) , (int) (col - row->begin()), *col);
-                //filter[i][j] = vector.at(i).at(j)
                 filter[(int) (row - filterArray->begin())][(int) (col - row->begin())] = *col;
             }
         }
@@ -92,7 +89,6 @@ Image* ConvolveCommand::convolveSeperable(Image* image, Filter* f){
             
             for (int pix =0; pix< numWeights; pix++) {
                 
-                //TODO: confirm bounds in regards to filter_r
                 int distFromR = pix - f->getFilterR();
                 //index of pixel we are examining, is the current + the distance from the point of comparison (takes into account neg and pos values)
                 int horizPixIndex = j + distFromR;
@@ -112,9 +108,6 @@ Image* ConvolveCommand::convolveSeperable(Image* image, Filter* f){
                 avgB += weights->at(pix) * originalImage[i][horizPixIndex][2];
                 
             }
-            
-            //            printf("   R: %f, G: %f, B: %f\n",r, g, b);
-            //            printf("avgR: %f, avgG: %f, avgB: %f\n",avgR, avgG, avgB);
             
             newImage[i][j][0] =(avgR);
             newImage[i][j][1] =(avgG);
@@ -158,7 +151,6 @@ Image* ConvolveCommand::execute(Image* image){
         return convolveNonSeperable(image, f);
     }
 }
-//virtual std::string getStartMessage() = 0;
 std::string ConvolveCommand::getEndMessage(){
     char buffer [100];
     int n;
