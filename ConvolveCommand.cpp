@@ -56,7 +56,7 @@ Image* ConvolveCommand::convolveNonSeperable(Image* image, Filter* f){
                         green += originalImage[imageY][imageX][1] * filter[filterX][filterY];
                         blue += originalImage[imageY][imageX][2] * filter[filterX][filterY];
                     }
-                    //truncate values smaller than zero and larger than 255
+                    //restrict range of values to be between 0 and 255
                     newImage[y][x][0] = std::min(std::max((scalar * red + bright), 0.0), 255.0);
                     newImage[y][x][1] = std::min(std::max((scalar * green + bright), 0.0), 255.0);
                     newImage[y][x][2] = std::min(std::max((scalar * blue + bright), 0.0), 255.0);

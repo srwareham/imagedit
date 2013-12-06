@@ -3,7 +3,8 @@
 //  imagedit
 //
 //  Created by Sean Wareham on 11/23/13.
-//  Copyright (c) 2013 Sean Wareham. All rights reserved.
+//
+// Some filters sourced from Lode Vandevenne at lodev.org/cgtutor/filtering.html
 //
 
 #include "Filter.h"
@@ -37,7 +38,7 @@ void Filter::buildFilterValues(){
         myScalar =1.0;
         myBrightnessOffset = 128.0;
         
-      //default do nothing
+      //show horizontal edges
     }else if ( myFilterName == "showhedges"){
         temp =
         {
@@ -50,7 +51,7 @@ void Filter::buildFilterValues(){
         myFilterR = 2;
         myScalar = 1.0;
         myBrightnessOffset = 0.0;
-        
+        //show vertical edges
     }else if (myFilterName == "showvedges"){
         temp =
         {

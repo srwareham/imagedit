@@ -4,6 +4,9 @@
 //
 //  Created by Sean Wareham on 12/4/13.
 //  Copyright (c) 2013 Sean Wareham. All rights reserved.
+// NOTE: at present this is not truely bilinear interpolation.  It is a more simplified algorithm which involves taking the
+// average pixel value across the 4 nearest pixels and using that value.  True interpolation would result in the new pixel
+// not necessarily being equadistant from its 4 closest neighbors.
 //
 
 #include "BilinearScaleCommand.h"
@@ -29,6 +32,8 @@ Image* BilinearScaleCommand::execute(Image* image){
         myNewW = (int) (origHeight * (scaleByPercent/100.0));
     }
     
+    
+    //these are to index in the original image.  Need heuristic for discrepency between actual value and new value
     int dX = 2;
     int dY = 2;
     

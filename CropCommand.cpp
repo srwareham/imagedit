@@ -14,6 +14,8 @@ CropCommand::CropCommand(int top, int bottom, int left, int right) :  top(top), 
 Image* CropCommand::execute(Image* image){
     int origWidth = image->getWidth();
     int origHeight = image->getHeight();
+    int max = image->getMax();
+    
     //note there is no error handling for permissable bounds. things will go wrong with bad input
     float*** originalImage = image->getImage();
     //top left down to bottom right is the order
@@ -28,7 +30,7 @@ Image* CropCommand::execute(Image* image){
     }
     
     
-    Image* croppedImage = new Image(newWidth,newHeight);
+    Image* croppedImage = new Image(newWidth,newHeight,max);
     //TODO: for some reason newImage is not being inatialized.  its width and height are 0? happens right about here
     float*** newImage = croppedImage->getImage();
     
@@ -37,7 +39,7 @@ Image* CropCommand::execute(Image* image){
         for (int j = left; j< right; j++){
 //            newImage[newI][newJ][0] = originalImage[i][j][0];
 //            printf("%f\n", originalImage[i][j][0]);
-            newImage[0][0][0] =1;
+            newImage[newJ][newI][0] =1;
 //            newImage[newI][newJ][1] = originalImage[i][j][1];
 //            newImage[newI][newJ][2] = originalImage[i][j][2];
             newJ++;
