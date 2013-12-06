@@ -21,6 +21,9 @@ bool CommandManager::isPossibleCommand(std::string referenceName){
     return (myCommandFactories->find(referenceName) != myCommandFactories->end());
 }
 
+//Reference names need to be serialized so that there are no duplicates in the map.
+//yet they must all access the correct factory.  This strips off the serial number
+//so we can match it to the proper factory
 std::string CommandManager::cleanName(std::string referenceName){
     std::string ans;
     

@@ -21,6 +21,7 @@ ImageCommand* ColorizeFactory::buildImageCommand(std::map<std::string, std::stri
     s.insert("-negative");
     s.insert("-grayscale");
     s.insert("-removered");
+    s.insert("-cartoonize");
 
     //if we are using a preset then we know there is only 1 argment.
     //this only works when there is no batching.  However, if a dummy value is given

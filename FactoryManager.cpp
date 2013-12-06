@@ -10,6 +10,7 @@
 #include "ConvolveFactory.h"
 #include "BilinearScaleFactory.h"
 #include "ColorizeFactory.h"
+#include "CropFactory.h"
 
 FactoryManager::FactoryManager(){
     myCommandFactories = new std::map<std::string, Factory*>();
@@ -23,6 +24,7 @@ void FactoryManager::instantiateFactories(){
     defineFactory("convolve", new ConvolveFactory());
     defineFactory("scale", new BilinearScaleFactory());
     defineFactory("colorize", new ColorizeFactory());
+    defineFactory("crop", new CropFactory());
 }
 
 std::map<std::string, Factory*>* FactoryManager::getFactories(){
