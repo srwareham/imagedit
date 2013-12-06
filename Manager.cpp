@@ -35,6 +35,8 @@ void Manager::run(){
     //load the desired image
     Image* originalImage = new Image(imageIn.c_str());//("/Users/srwareham/Desktop/idk.ppm");
     Image* currentImage = originalImage;
+    
+    //apply all necessary transformation in the sequence they were specified
     for (int i=0; i< myCommandsToExecute->size(); i++){
         ImageCommand* command = myCommandsToExecute->at(i);
         printf("%s\n",command->getStartMessage().c_str());

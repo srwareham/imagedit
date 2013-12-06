@@ -24,6 +24,7 @@ public:
     Parser();
     std::vector<std::string> subString(int start, int end, std::vector<std::string> inputVector);
     std::map<std::string, std::string>* buildFlagMap(std::vector<std::string> flagPairs);
+    //commandMap is defined in References.h
     commandMap* buildCommandMap (int argc, const char * argv[]);
     std::string getInputPath();
     std::string getOutputPath();

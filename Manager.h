@@ -10,7 +10,6 @@
 #define __imagedit__Manager__
 
 #include <iostream>
-#include <map>
 #include <string>
 #include <vector>
 #include "Parser.h"

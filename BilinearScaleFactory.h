@@ -10,9 +10,6 @@
 #define __imagedit__BilinearScaleFactory__
 
 #include <iostream>
-#include <string>
-#include <map>
-#include <string>
 #include "Factory.h"
 
 class BilinearScaleFactory : public Factory {

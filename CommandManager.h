@@ -24,6 +24,7 @@ private:
     void queueCommand(std::string referenceName, std::map<std::string,std::string>* flags, std::vector<ImageCommand*>* commandsToExecute);
 public:
     CommandManager(std::map<std::string, Factory*>* commandFactories);
+    //commandMap is defined in References.h
     std::vector<ImageCommand*>* getCommandsToExecute(commandMap* commandMap);
 };
 

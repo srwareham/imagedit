@@ -10,13 +10,9 @@
 #define __imagedit__FactoryManager__
 
 #include <iostream>
-#include <map>
-#include <string>
 #include "Factory.h"
 
 class FactoryManager {
-    //(command referenceName, map<CommandFlag,flagVal>)
-    //    typedef std::map<std::string, std::map<std::string, std::string>> commandMap;
 private:
     std::map<std::string, Factory*>* myCommandFactories;
     

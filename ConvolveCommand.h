@@ -10,7 +10,6 @@
 #define __imagedit__ConvolveCommand__
 
 #include <iostream>
-#include <string>
 #include "ImageCommand.h"
 #include "Filter.h"
 

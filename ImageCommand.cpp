@@ -9,11 +9,3 @@
 #include "ImageCommand.h"
 
 ImageCommand::~ImageCommand(){};
-
-
-/*
- Add a flag to Map of flags
- */
-//void Interface_ImageCommand::setFlag(std::string flag, std::string flagVal){
-//    myFlags.insert(std::make_pair(flag, flagVal));
-//}

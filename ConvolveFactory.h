@@ -10,10 +10,6 @@
 #define __imagedit__ConvolveFactory__
 
 #include <iostream>
-#include "ConvolveCommand.h"
-#include <string>
-#include <map>
-#include <string>
 #include "Factory.h"
 
 class ConvolveFactory : public Factory {

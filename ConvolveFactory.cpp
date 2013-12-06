@@ -7,6 +7,7 @@
 //
 
 #include "ConvolveFactory.h"
+#include "ConvolveCommand.h"
 
 
 ConvolveFactory::ConvolveFactory(){};

@@ -10,7 +10,6 @@
 #define __imagedit__BilinearScaleCommand__
 
 #include <iostream>
-#include <string>
 #include "ImageCommand.h"
 
 class BilinearScaleCommand : public ImageCommand {

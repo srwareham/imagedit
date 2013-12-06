@@ -10,7 +10,6 @@
 #define __imagedit__Interface_ImageComand__
 
 #include <iostream>
-#include <map>
 #include <string>
 #include "Image.h"
 
