@@ -12,17 +12,40 @@ CommandManager::CommandManager(std::map<std::string, Factory*>* commandFactories
     myCommandFactories = commandFactories;
 }
 
+bool CommandManager::is_number(const std::string& s)
+{
+    return !s.empty() && std::find_if(s.begin(), s.end(), [](char c) { return !std::isdigit(c); }) == s.end();
+}
+
 bool CommandManager::isPossibleCommand(std::string referenceName){
-    
     return (myCommandFactories->find(referenceName) != myCommandFactories->end());
 }
 
+std::string CommandManager::cleanName(std::string referenceName){
+    std::string ans;
+    
+    bool foundint = false;
+    int index = 0;
+    while (!foundint && index < referenceName.size()){
+        std::string letter = referenceName.substr(index, index+1);
+        if (is_number(letter)){
+            foundint = true;
+            break;
+        }
+        index++;
+    }
+    
+    ans = referenceName.substr(0,index);
+    return ans;
+}
+
 void CommandManager::queueCommand(std::string referenceName, std::map<std::string,std::string>* flags, std::vector<ImageCommand*>* commandsToExecute){
-    if (!isPossibleCommand(referenceName)){
+    std::string cName = cleanName(referenceName);
+    if (!isPossibleCommand(cleanName(cName))){
         //TODO:perhaps add some error handling here
         return;
     }else{
-        Factory* factory = myCommandFactories->at(referenceName);
+        Factory* factory = myCommandFactories->at(cName);
         commandsToExecute->push_back(factory->buildImageCommand(flags));
         
     }
