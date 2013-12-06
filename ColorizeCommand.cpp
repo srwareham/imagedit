@@ -8,8 +8,53 @@
 
 #include "ColorizeCommand.h"
 
-ColorizeCommand::ColorizeCommand(std::string colorEffect): myColorEffect(colorEffect){};
+ColorizeCommand::ColorizeCommand(std::string colorEffect): myColorEffect(colorEffect){
+//    predefined = 
+};
 
+ColorizeCommand::ColorizeCommand(double redBias, double greenBias, double blueBias) : myRedBias(redBias), myGreenBias(greenBias), myBlueBias(blueBias) {
+    predefined = false;
+};
+
+
+void ColorizeCommand::applyColor(float*** newImage, float*** originalImage, int height, int width, double redBias, double greenBias, double blueBias){
+    for(int i = height-1; i >= 0; i--) {
+        for(int j = 0; j<width; j++) {
+            float oldR = originalImage[i][j][0];
+            float oldG = originalImage[i][j][1];
+            float oldB = originalImage[i][j][2];
+            //            float newR = oldR * 0.393 + oldG * 0.769 + oldB * 0.189; //r
+            //            float newG = oldR * 0.349 + oldG * 0.686 + oldB * 0.168; //g
+            //            float newB = oldR * 0.272 + oldG * 0.534 + oldB * 0.131; //b
+            //cool stuff
+            //            float base = 0.3 * oldR + 0.59 * oldG + 0.11 * oldB;
+            //            float newR = 0.9 * base;
+            //            float newG =  0.1* base;
+            //            float newB =   0.1 * base;
+            
+            float newR = oldR * redBias;
+            float newG = oldG * greenBias;
+            float newB = oldB * blueBias;
+            
+            
+            if (newR > 255){
+                newR = 255.0;
+            }
+            if (newG > 255){
+                newG = 255.0;
+            }
+            if (newB > 255){
+                newB = 255.0;
+            }
+            
+            newImage[i][j][0] = newR;
+            newImage[i][j][1] = newG;
+            newImage[i][j][2] = newB;
+        }
+    }
+
+    
+}
 
 
 //this may have more repeated code and may look uglier than putting the function call in one
@@ -21,7 +66,7 @@ ColorizeCommand::ColorizeCommand(std::string colorEffect): myColorEffect(colorEf
 void ColorizeCommand::applyGrayscale(float*** newImage, float*** originalImage, int height, int width){
     for(int i = height-1; i >= 0; i--) {
         for(int j = 0; j<width; j++) {
-            float y = (0.2126* originalImage[i][j][0]) + (0.7251* originalImage[i][j][1]) + (0.0722* originalImage[i][j][2]);
+            float y = (0.310* originalImage[i][j][0]) + (0.591* originalImage[i][j][1]) + (0.111* originalImage[i][j][2]);
             newImage[i][j][0] = y; //r
             newImage[i][j][1] = y; //g
             newImage[i][j][2] = y; //b
@@ -42,15 +87,67 @@ void ColorizeCommand::applyRemovered(float*** newImage, float*** originalImage, 
 void ColorizeCommand::applySepia(float*** newImage, float*** originalImage, int height, int width){
     for(int i = height-1; i >= 0; i--) {
         for(int j = 0; j<width; j++) {
-            float y = (0.310* originalImage[i][j][0]) + (0.591* originalImage[i][j][1]) + (0.111* originalImage[i][j][2]);
-            newImage[i][j][0] = y; //r
-            newImage[i][j][1] = y; //g
-            newImage[i][j][2] = y; //b
+            float oldR = originalImage[i][j][0];
+            float oldG = originalImage[i][j][1];
+            float oldB = originalImage[i][j][2];
+//            float newR = oldR * 0.393 + oldG * 0.769 + oldB * 0.189; //r
+//            float newG = oldR * 0.349 + oldG * 0.686 + oldB * 0.168; //g
+//            float newB = oldR * 0.272 + oldG * 0.534 + oldB * 0.131; //b
+            //cool stuff
+//            float base = 0.3 * oldR + 0.59 * oldG + 0.11 * oldB;
+//            float newR = 0.9 * base;
+//            float newG =  0.1* base;
+//            float newB =   0.1 * base;
+            
+            float newR = oldR *0.9;
+            float newG = oldG * 0.1;
+            float newB = oldB * 0.1;
+            
+            
+            if (newR > 255){
+                newR = 255.0;
+            }
+            if (newG > 255){
+                newG = 255.0;
+            }
+            if (newB > 255){
+                newB = 255.0;
+            }
+            
+            newImage[i][j][0] = newR;
+            newImage[i][j][1] = newG;
+            newImage[i][j][2] = newB;
+        }
+    }
+    
+}
+
+void ColorizeCommand::applyCartoonize(float ***newImage, float ***originalImage, int height, int width){
+    for(int i = height-1; i >= 0; i--) {
+        for(int j = 0; j<width; j++) {
+            float oldR = originalImage[i][j][0];
+            float oldG = originalImage[i][j][1];
+            float oldB = originalImage[i][j][2];
+            float base = 0.3 * oldR + 0.59 * oldG + 0.11 * oldB;
+            float newR = 30 * base;
+            float newG = base;
+            float newB = base;
+            
+            if (newR > 255){
+                newR = 255.0;
+            }
+            if (newG > 255){
+                newG = 255.0;
+            }
+            if (newB > 255){
+                newB = 255.0;
+            }
+            newImage[i][j][0] = newR;
+            newImage[i][j][1] = newG;
+            newImage[i][j][2] = newB;
         }
     }
 }
-
-
 
 Image* ColorizeCommand::execute(Image* image){
     Image* colorized = new Image(image->getWidth(), image->getHeight(), image->getMax());
@@ -59,14 +156,21 @@ Image* ColorizeCommand::execute(Image* image){
     int height = image->getHeight();
     int width = image->getWidth();
     
-    if (myColorEffect == "-removered"){
-        applyRemovered(newImage, originalImage, height, width);
-    }else if( myColorEffect == "-sepia"){
-        applySepia(newImage, originalImage, height, width);
-    }else if(myColorEffect == "-grayscale"){
-        applyGrayscale(newImage, originalImage, height, width);
-    }else {
+    //if this is an existing color scheme
+    if (predefined){
+        if (myColorEffect == "-removered"){
+            applyRemovered(newImage, originalImage, height, width);
+        }else if( myColorEffect == "-sepia"){
+            applySepia(newImage, originalImage, height, width);
+        }else if(myColorEffect == "-grayscale"){
+            applyGrayscale(newImage, originalImage, height, width);
+        }else if(myColorEffect == "-cartoonize"){
+            applyCartoonize(newImage, originalImage, height, width);
+        }else {
         //TODO: perhaps add error handling
+        }
+    }else{
+        applyColor(newImage,originalImage,height, width, myRedBias, myGreenBias, myBlueBias);
     }
     
     return colorized;
@@ -77,13 +181,23 @@ std::string ColorizeCommand::getStartMessage(){
     int n;
     //we use +1 here only because we dont want to print the "-" which is the first character.
     //yey pointer manipulation!
-    n = snprintf(buffer, 100, "Colorizing Image with style: %s", myColorEffect.c_str()+1);
+    if (predefined){
+        n = snprintf(buffer, 100, "Colorizing Image with style: %s", myColorEffect.c_str()+1);
+    }else{
+        n = snprintf(buffer, 100, "Colorizing with Biases R=%.2f%% G=%.2f%% B=%.2f%%", myRedBias* 100, myGreenBias * 100, myBlueBias * 100);
+    }
     return std::string(buffer);
 };
 
 std::string ColorizeCommand::getEndMessage(){
     char buffer [100];
     int n;
-    n = snprintf(buffer, 100, "Colorized Image with style: %s", myColorEffect.c_str()+1);
+    
+    if (predefined){
+        n = snprintf(buffer, 100, "Colorized Image with style: %s", myColorEffect.c_str()+1);
+    }else{
+        n = snprintf(buffer, 100, "Colorized with Biases R=%.2f%% G=%.2f%% B=%.2f%%", myRedBias* 100, myGreenBias * 100, myBlueBias * 100);
+    }
+    
     return std::string(buffer);
 };

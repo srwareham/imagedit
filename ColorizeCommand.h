@@ -15,11 +15,17 @@
 class ColorizeCommand : public ImageCommand {
 private:
     std::string myColorEffect;
+    double myRedBias, myGreenBias, myBlueBias;
+    
+    void applyColor(float*** newImage, float*** originalImage, int height, int width, double redBias, double greenBias, double blueBias);
     void applySepia(float*** newImage, float*** originalImage, int height, int width);
     void applyGrayscale(float*** newImage, float*** originalImage, int height, int width);
     void applyRemovered(float*** newImage, float*** originalImage, int height, int width);
+    void applyCartoonize(float*** newImage, float*** originalImage, int height, int width);
+    bool predefined = true;
 public:
     ColorizeCommand(std::string colorEffect);
+    ColorizeCommand(double redBias, double greenBias, double blueBias);
     Image* execute(Image* image);
     std::string getStartMessage();
     std::string getEndMessage();

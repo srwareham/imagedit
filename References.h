@@ -11,7 +11,7 @@
 
 #include <map>
 #include <string>
-//define frequently used type
+//define frequently used type for unified approach
 typedef std::map<std::string, std::map<std::string, std::string>*> commandMap;
 
 #endif

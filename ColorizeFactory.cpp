@@ -14,21 +14,49 @@ ColorizeFactory::ColorizeFactory(){};
 
 ImageCommand* ColorizeFactory::buildImageCommand(std::map<std::string, std::string>* flagMap){
     //default effect
-   std::string desiredEffect = "-grayscale";
-    
-    std::set<std::string> s;
-    s.insert("-sepia");
-    s.insert("-grayscale");
-    s.insert("-removered");
 
-    //this purposedly only supports 1 argument
-    std::map<std::string, std::string>::iterator iter;
-    for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
-        //if the desiredEffect is one of the defined effects
-        if (s.find(iter->first) != s.end()){
-            desiredEffect = iter->first;
+    //if we are using a preset
+    if (flagMap->size() ==1){
+        //default grayscale
+        std::string desiredEffect = "-grayscale";
+        
+        std::set<std::string> s;
+        s.insert("-sepia");
+        s.insert("-grayscale");
+        s.insert("-removered");
+        
+        //this purposedly only supports 1 argument
+        std::map<std::string, std::string>::iterator iter;
+        for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
+            //if the desiredEffect is one of the defined effects
+            if (s.find(iter->first) != s.end()){
+                desiredEffect = iter->first;
+            }
+            //if multiple colorEffects were input, only the first will be applied
         }
-        //if multiple colorEffects were input, only the first will be applied
+        return new ColorizeCommand(desiredEffect);
+        
+        
+    }else{
+        //default do nothing
+        double redBias = 1.0 , blueBias = 1.0, greenBias = 1.0;
+        
+        std::map<std::string, std::string>::iterator iter;
+        for (iter = flagMap->begin(); iter != flagMap->end(); ++iter) {
+            //        printf("test\n");
+            if (iter->first == "-r"){
+                redBias = atof(iter->second.c_str())/100.0;
+            }
+            if (iter->first == "-g") {
+                greenBias = atof(iter->second.c_str())/100.0;
+            }
+            if (iter->first == "-b") {
+                blueBias = atof(iter->second.c_str())/100.0;
+            }
+        }
+        
+        return new ColorizeCommand(redBias, greenBias, blueBias);
+        
     }
-    return new ColorizeCommand(desiredEffect);
+
 }
