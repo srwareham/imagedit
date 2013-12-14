@@ -14,7 +14,6 @@
 Image* BilinearScaleCommand::execute(Image *image){
     int origWidth = image->getWidth();
     int origHeight = image->getHeight();
-    int max = image->getMax();
     
     float*** originalImage = image->getImage();
     
@@ -25,7 +24,7 @@ Image* BilinearScaleCommand::execute(Image *image){
         myNewH = (int) (origHeight * (scaleByPercent/100.0));
     }
   
-    Image* scaledImage = new Image(myNewW, myNewH, max);
+    Image* scaledImage = new Image(myNewW, myNewH);
     float*** newImage = scaledImage->getImage();
     
     double xratio = (double)(origWidth-1) / double(myNewW-1);
@@ -89,5 +88,14 @@ std::string BilinearScaleCommand::getStartMessage(){
 }
 
 std::string BilinearScaleCommand::getEndMessage(){
-    return "scaled\n";
+    char buffer [100];
+    int n;
+    //if we used a percentage
+    if (scaleByPercent >0){
+        n = snprintf(buffer, 100, "Scaled Image by: %f%%\n", scaleByPercent);
+        //if we used hard coded width and height
+    }else {
+        n = snprintf(buffer, 100, "Scaled Image to Width: %d Height: %d\n", myNewW, myNewH);
+    }
+    return std::string(buffer);
 }

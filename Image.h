@@ -24,7 +24,8 @@ private:
     float* imageDisplayArray;
 public:
     Image(int w, int h, int max);
-    Image(int w, int h);
+    //if no max size is provided, 255 is assumed
+    Image(int w, int h): Image(w,h,255){};
     Image(const char* filePath);
     ~Image(void);
     void writeImage(const char* filePath);

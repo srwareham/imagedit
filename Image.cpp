@@ -26,9 +26,6 @@ Image::Image(int w, int h, int m =3) {
     imageDisplayArray = NULL;
 }
 
-Image::Image(int w, int h){
-    Image::Image(w,h,255);
-}
 
 Image::Image(const char* filePath){
     FILE* file;

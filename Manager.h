@@ -19,8 +19,8 @@
 class Manager {
 private:
     std::vector<ImageCommand*>* myCommandsToExecute;
-    std::string imageIn;
-    std::string imageOut;
+    std::string myImageIn;
+    std::string myImageOut;
 public:
     Manager(int argc, const char * argv[]);
     void run();
