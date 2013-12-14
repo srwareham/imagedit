@@ -11,6 +11,7 @@
 #include "BilinearScaleFactory.h"
 #include "ColorizeFactory.h"
 #include "CropFactory.h"
+#include "FlipFactory.h"
 
 FactoryManager::FactoryManager(){
     myCommandFactories = new std::map<std::string, Factory*>();
@@ -25,6 +26,7 @@ void FactoryManager::instantiateFactories(){
     defineFactory("scale", new BilinearScaleFactory());
     defineFactory("colorize", new ColorizeFactory());
     defineFactory("crop", new CropFactory());
+    defineFactory("flip", new FlipFactory());
 }
 
 std::map<std::string, Factory*>* FactoryManager::getFactories(){
