@@ -12,12 +12,28 @@
 #include <iostream>
 #include "ImageCommand.h"
 
+class Point {
+    public:
+    int x, y;
+    Point(int x, int y) : x(x), y(y) {};
+    int getX(){
+        return x;
+    }
+    int getY(){
+        return y;
+    }
+};
+
 class BilinearScaleCommand : public ImageCommand {
 private:
     int myNewH, myNewW;
     double scaleByPercent = -1;//must be positive to be valid
-    double newPixelValue(double p00, double p01, double p10, double p11);
-    inline float interpolate(float val1, float val2, float coord1, float coord2, float dist);
+//    inline float interpolate(float val1, float val2, float coord1, float coord2, float dist);
+    float interpolate(float v1, float v2, float distanceRatio);
+    Point* getTopLeftCoord(int x, int y);
+    Point* getTopRightCoord(int x, int y);
+    Point* getBottomLeftCoord(int x, int y);
+    Point* getBottomRightCoord(int x, int y);
 public:
     Image* execute(Image* image);
     BilinearScaleCommand(int newH, int newW);
