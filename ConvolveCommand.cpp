@@ -17,10 +17,9 @@ ConvolveCommand::ConvolveCommand(std::string filterType, int filterR) : myFilter
 Image* ConvolveCommand::convolveNonSeperable(Image* image, Filter* f){
     int width = image->getWidth();
     int height = image->getHeight();
-    int max = image->getMax();
     
     float*** originalImage = image->getImage();
-    Image* filteredImage = new Image(width,height,max);
+    Image* filteredImage = new Image(width,height);
     float*** newImage = filteredImage->getImage();
     
         std::vector<std::vector<double>>* filterArray = f->getFilterArray();

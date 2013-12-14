@@ -15,7 +15,6 @@ Image* CropCommand::execute(Image* image){
     
     int origWidth = image ->getWidth();
     int origHeight = image ->getHeight();
-    int max = image ->getMax();
     float*** originalImage = image ->getImage();
     
     //error handling
@@ -30,7 +29,7 @@ Image* CropCommand::execute(Image* image){
     int newHeight = bottom -top;
     int newWidth = right -left;
     
-    Image* croppedImage = new Image(newWidth,newHeight,max);
+    Image* croppedImage = new Image(newWidth,newHeight);
     float*** newImage = croppedImage ->getImage();
 
     for (int i= top; i< bottom; i++){

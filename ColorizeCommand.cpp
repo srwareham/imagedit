@@ -115,7 +115,7 @@ void ColorizeCommand::applyCartoonize(float ***newImage, float ***originalImage,
 }
 
 Image* ColorizeCommand::execute(Image* image){
-    Image* colorized = new Image(image->getWidth(), image->getHeight(), image->getMax());
+    Image* colorized = new Image(image->getWidth(), image->getHeight());
     float*** newImage = colorized->getImage();
     float*** originalImage = image->getImage();
     int height = image->getHeight();
