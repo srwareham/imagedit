@@ -4,6 +4,7 @@
 //
 //  Created by Sean Wareham on 12/4/13.
 //  Copyright (c) 2013 Sean Wareham. All rights reserved.
+//  Heuristic sourced from forums.codeguru.com/showthread.php?167306-Bilinear-Interpolation-Scaling-a-bitmap&p=463201#post463201
 //
 
 #include "BilinearScaleCommand.h"
