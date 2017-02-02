@@ -1,26 +1,19 @@
-OBJS = Interface_ImageCommand.o Manager.o Parser.o RemoveRedCommand.o Main.o
-CC = g++
-DEBUG = -g
-CFLAGS = -Wall -c $(DEBUG)
-LFLAGS = -Wall $(DEBUG)
+CC=gcc
+CXX=g++
+RM=rm -f
+CPPFLAGS=-std=c++11 -Wall
 
-all : $(OBJS)
-	$(CC) $(LFLAGS) $(OBJS) -o imagedit
+H_FILES := $(wildcard *.h)
+CPP_FILES := $(wildcard *.cpp)
+OBJ_FILES := $(notdir $(CPP_FILES:.cpp=.o))
 
-Interface_ImageCommand.o : Interface_ImageCommand.h
-	$(CC) $(CFLAGS) Interface_ImageCommand.cpp
+all: imagedit
 
-Manager.o : Manager.h
-	$(CC) $(CFLAGS) Manager.cpp
-
-Parser.o : Parser.h
-	$(CC) $(CFLAGS) Parser.cpp 
-
-RemoveRedCommand.o : RemoveRedCommand.h
-	$(CC) $(CFLAGS) RemoveRedCommand.cpp
-
-Main.o :
-	$(CC) $(CFLAGS) Main.cpp
+imagedit: $(H_FILES) $(CPP_FILES) $(OBJ_FILES)
+	$(CXX) $(OBJ_FILES) -o imagedit $(CPPFLAGS)
 
 clean:
-	rm *.o
+	$(RM) $(OBJ_FILES)
+
+distclean: clean
+	$(RM) imagedit
