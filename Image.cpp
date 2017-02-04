@@ -8,6 +8,7 @@
 //
 
 #include "Image.h"
+#include <string.h>
 
 Image::Image(int w, int h, int m =3) {
     width = w;

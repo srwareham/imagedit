@@ -7,6 +7,7 @@
 //
 
 #include "CommandManager.h"
+#include <algorithm>
 
 CommandManager::CommandManager(std::map<std::string, Factory*>* commandFactories){
     myCommandFactories = commandFactories;
